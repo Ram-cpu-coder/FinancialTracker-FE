@@ -1,0 +1,17 @@
+
+@media screen and (max-width:1100px){
+    
+  .responsiveFlexCol{
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  img{
+    width: auto;
+  }
+  }
+
+  .widthResponsive{
+      width: 80%;
+  }
+}
