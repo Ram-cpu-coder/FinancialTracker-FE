@@ -8,7 +8,7 @@ import LineExpense from "../../components/graphs/LineExpense";
 
 const DashBoard = () => {
   return (
-    <div className="w-screen bg-gray-800">
+    <div className="w-full bg-gray-800">
       <Navbar />
       <div className="w-full flex justify-center">
         <div className="flex justify-center flex-col p-5 w-full">
