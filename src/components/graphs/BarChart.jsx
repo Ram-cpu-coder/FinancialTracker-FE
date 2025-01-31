@@ -25,7 +25,7 @@ const BarChart = () => {
     labels: ["January", "February", "March", "April", "May"],
     datasets: [
       {
-        label: "# of Amount",
+        label: ["# of Amount"],
         data: [340, 459],
         backgroundColor: ["#d75b5b", "#026617"],
         borderColor: "rgba(75, 192, 192, 1)",
@@ -43,7 +43,11 @@ const BarChart = () => {
     },
   };
 
-  return <Bar data={data} options={options} />;
+  return (
+    <div className="w-full h-[400px] bg-white rounded-lg flex items-center justify-center">
+      <Bar data={data} options={options} />
+    </div>
+  );
 };
 
 export default BarChart;

@@ -62,7 +62,7 @@ const LineExpense = () => {
     },
   };
   return (
-    <div className="w-[500px] h-[auto] bg-white rounded-lg flex items-center p-3">
+    <div className="w-[500px] h-[auto] bg-white rounded-lg flex items-center p-1">
       <Line data={data} options={options} />
     </div>
   );

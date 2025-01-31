@@ -74,6 +74,9 @@ const DashBoard = () => {
             <LineIncome />
             <LineExpense />
           </div>
+          <div className="p-3">
+            <BarChart />
+          </div>
         </div>
       </div>
 
