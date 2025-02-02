@@ -34,7 +34,7 @@ const CheckBox = () => {
   };
 
   return (
-    <div className="mt-4">
+    <div className="mt-4 overflow-x-scroll">
       <label>
         <input
           type="checkbox"
@@ -44,7 +44,7 @@ const CheckBox = () => {
         &nbsp;Select All
       </label>
       {/* list of transactions */}
-      <table className="w-full mt-4">
+      <table className="min-w-[800px] mt-4">
         <tr className="grid grid-cols-[50px_minmax(200px,_2fr)_1fr_1fr_1fr] text-left border-b py-2">
           <th>#</th>
           <th>Title</th>
@@ -54,8 +54,8 @@ const CheckBox = () => {
         </tr>
         {items.map(({ id, name }) => (
           <tr className="grid grid-cols-[50px_minmax(200px,_2fr)_1fr_1fr_1fr] text-left border-b py-2">
-            <td>{id}</td>
-            <td>
+            <td className="my-auto">{id}</td>
+            <td className="my-auto">
               <label key={id}>
                 <input
                   type="checkbox"
@@ -65,9 +65,9 @@ const CheckBox = () => {
                 &nbsp;{name}
               </label>
             </td>
-            <td>DATE</td>
-            <td>INCOME</td>
-            <td>EXPENSE</td>
+            <td className="my-auto">DATE</td>
+            <td className="my-auto">INCOME</td>
+            <td className="my-auto">EXPENSE</td>
           </tr>
         ))}
         <tr className="grid grid-cols-[3fr_1.5fr_1fr] text-left border-b py-2">

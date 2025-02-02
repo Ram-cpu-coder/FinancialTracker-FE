@@ -24,7 +24,7 @@ const Navbar = () => {
 
   return isMobile ? (
     <nav className="bg-blue-600 p-2 text-white shadow-md w-full flex justify-center">
-      <div className="flex items-center justify-between w-[80%]">
+      <div className="flex items-center justify-between w-[90%]">
         {/* Logo */}
         <Link to="/">
           <div className="text-2xl font-bold">FinTrack</div>
@@ -59,7 +59,7 @@ const Navbar = () => {
     </nav>
   ) : (
     <nav className="bg-blue-600 p-2 text-white shadow-md w-full flex justify-center">
-      <div className="flex items-center justify-between w-[80%]">
+      <div className="flex items-center justify-between w-[90%]">
         {/* Logo */}
         <Link to="/">
           <div className="text-2xl font-bold">FinTrack</div>

@@ -9,7 +9,7 @@ const SignUp = () => {
       <Navbar />
       <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
         {/* Container for Form and Image */}
-        <div className="flex flex-col bg-white rounded-lg shadow-md overflow-hidden w-full max-w-5xl flex-col md:flex-row">
+        <div className="flex flex-col bg-white rounded-lg shadow-md overflow-hidden w-full max-w-5xl flex-col md:flex-row p-5">
           {/* Image (on top in mobile view) */}
           <div className="w-full order-1 md:order-2 flex justify-center">
             <img
@@ -20,7 +20,7 @@ const SignUp = () => {
           </div>
 
           {/* Sign Up Form (below image in mobile view) */}
-          <div className="w-full order-2 md:order-1 p-8">
+          <div className="w-full order-2 md:order-1 p-5 border rounded-lg m-2">
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
               Start Tracking Your Finances Today!
             </h2>

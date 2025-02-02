@@ -20,7 +20,7 @@ const Login = () => {
           </div>
 
           {/* Login Form (below image in mobile view) */}
-          <div className="w-full order-2 md:order-1 p-8">
+          <div className="w-full order-2 md:order-1 p-5 border rounded-lg m-5">
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
               Log In To Your Account
             </h2>

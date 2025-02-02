@@ -1,5 +1,8 @@
-
-
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0;
+}
 
 @media screen and (max-width:1100px){
     
@@ -15,5 +18,34 @@
 
   .widthResponsive{
       width: 80%;
+  }
+.transactionMediaQuery{
+  width: 90%;
+}
+  .addTransactionMediaQuery{
+    width: 60%;
+  }
+}
+@media screen and (max-width:900px){
+  .barForTransaction{
+    flex-direction: column;
+    align-items: end;
+    input{
+      margin: 20px 0;
+      padding: 10px 5px;
+      width: 40%;
+    }
+    button{
+      width: auto;
+    }
+  }
+  .barForTransaction>div{
+    align-items: center;
+    width: 100%;
+  }
+}
+@media screen and (max-width:750px){
+  .addTransactionMediaQuery{
+    width: 80%;
   }
 }
