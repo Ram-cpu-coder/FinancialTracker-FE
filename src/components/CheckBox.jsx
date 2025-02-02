@@ -44,7 +44,7 @@ const CheckBox = () => {
         &nbsp;Select All
       </label>
       {/* list of transactions */}
-      <table className="min-w-[800px] mt-4">
+      <table className="min-w-[1050px] mt-4">
         <tr className="grid grid-cols-[50px_minmax(200px,_2fr)_1fr_1fr_1fr] text-left border-b py-2">
           <th>#</th>
           <th>Title</th>

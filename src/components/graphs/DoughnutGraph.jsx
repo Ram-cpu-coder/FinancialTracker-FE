@@ -39,7 +39,7 @@ const DoughnutGraph = () => {
     },
   };
   return (
-    <div className="w-[500px] h-[auto] bg-white rounded-lg p-3">
+    <div className="w-[400px] h-[auto] bg-white rounded-lg p-3 flex justify-center">
       <Doughnut data={data} options={options} />
     </div>
   );
