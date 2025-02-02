@@ -34,8 +34,8 @@ const CheckBox = () => {
   };
 
   return (
-    <div>
-      <label className="">
+    <div className="mt-4">
+      <label>
         <input
           type="checkbox"
           onChange={handleSelectedAll}
@@ -43,18 +43,39 @@ const CheckBox = () => {
         />
         &nbsp;Select All
       </label>
-      <div className="flex flex-col mt-4">
+      {/* list of transactions */}
+      <table className="w-full mt-4">
+        <tr className="grid grid-cols-[50px_minmax(200px,_2fr)_1fr_1fr_1fr] text-left border-b py-2">
+          <th>#</th>
+          <th>Title</th>
+          <th>Date</th>
+          <th>Out</th>
+          <th>In</th>
+        </tr>
         {items.map(({ id, name }) => (
-          <label key={id}>
-            <input
-              type="checkbox"
-              checked={selectedIds.includes(id)}
-              onChange={() => handleCheckBoxChange(id)}
-            />
-            &nbsp;{name}
-          </label>
+          <tr className="grid grid-cols-[50px_minmax(200px,_2fr)_1fr_1fr_1fr] text-left border-b py-2">
+            <td>{id}</td>
+            <td>
+              <label key={id}>
+                <input
+                  type="checkbox"
+                  checked={selectedIds.includes(id)}
+                  onChange={() => handleCheckBoxChange(id)}
+                />
+                &nbsp;{name}
+              </label>
+            </td>
+            <td>DATE</td>
+            <td>INCOME</td>
+            <td>EXPENSE</td>
+          </tr>
         ))}
-      </div>
+        <tr className="grid grid-cols-[3fr_1.5fr_1fr] text-left border-b py-2">
+          <td></td>
+          <th>Total Balance</th>
+          <th>$2345</th>
+        </tr>
+      </table>
     </div>
   );
 };
