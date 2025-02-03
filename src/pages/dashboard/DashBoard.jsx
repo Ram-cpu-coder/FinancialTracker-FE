@@ -1,6 +1,4 @@
 import React from "react";
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
 import BarChart from "../../components/graphs/BarChart";
 import DoughnutGraph from "../../components/graphs/DoughnutGraph";
 import LineIncome from "../../components/graphs/LineIncome";
@@ -9,7 +7,6 @@ import LineExpense from "../../components/graphs/LineExpense";
 const DashBoard = () => {
   return (
     <div className="w-full bg-gray-800">
-      <Navbar />
       <div className="w-full flex justify-center">
         <div className="flex justify-center flex-col p-5 md:w-[80%] w-full">
           <h1 className="text-4xl font-bold p-2 text-white">DashBoard</h1>
@@ -79,8 +76,6 @@ const DashBoard = () => {
           </div>
         </div>
       </div>
-
-      <Footer />
     </div>
   );
 };

@@ -6,8 +6,6 @@ import {
   FaMobileAlt,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import Footer from "./components/Footer";
-import Navbar from "./components/Navbar";
 
 const Home = () => {
   const features = [
@@ -35,7 +33,6 @@ const Home = () => {
 
   return (
     <div>
-      <Navbar />
       <div className="min-h-screen flex flex-col">
         {/* Hero Section */}
         <section className="bg-gradient-to-br from-blue-50 to-blue-100 py-20 px-4">
@@ -103,7 +100,6 @@ const Home = () => {
           </div>
         </section>
       </div>
-      <Footer />
     </div>
   );
 };

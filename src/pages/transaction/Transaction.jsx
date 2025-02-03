@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
 import CheckBox from "../../components/CheckBox";
 import CreateTransaction from "./CreateTransaction";
 
@@ -14,7 +12,6 @@ const Transaction = () => {
   };
   return (
     <div>
-      <Navbar />
       <div className="flex justify-center">
         <div className="flex justify-center relative w-full bg-white min-h-screen">
           <div className="px-5 py-10 my-5 bg-gray-800 text-white min-h-[60vh] w-[70%] rounded-lg transactionMediaQuery">
@@ -57,7 +54,6 @@ const Transaction = () => {
           )}
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
