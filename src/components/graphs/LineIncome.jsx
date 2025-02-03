@@ -64,7 +64,7 @@ const LineIncome = () => {
   };
 
   return (
-    <div className="w-[400px] h-[auto] bg-white rounded-lg flex items-center p-1">
+    <div className="md:w-[350px] w-full min-h-[300px] bg-white rounded-lg flex items-center p-1">
       <Line data={data} options={options} />
     </div>
   );

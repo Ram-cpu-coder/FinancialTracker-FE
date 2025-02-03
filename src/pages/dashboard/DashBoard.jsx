@@ -11,7 +11,7 @@ const DashBoard = () => {
     <div className="w-full bg-gray-800">
       <Navbar />
       <div className="w-full flex justify-center">
-        <div className="flex justify-center flex-col p-5 w-[80%]">
+        <div className="flex justify-center flex-col p-5 md:w-[80%] w-full">
           <h1 className="text-4xl font-bold p-2 text-white">DashBoard</h1>
           <hr className="text-white" />
 
@@ -68,7 +68,7 @@ const DashBoard = () => {
           </div>
 
           {/* graphs */}
-          <div className="flex justify-between p-3 flex-wrap flex-row gap-1">
+          <div className="flex md:justify-between p-3 lg:flex-wrap flex-nowrap lg:justify-center lg:gap-10 md:flex-row flex-col justify-center gap-1">
             {/* <BarChart /> */}
             <DoughnutGraph />
             <LineIncome />

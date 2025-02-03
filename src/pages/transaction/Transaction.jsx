@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import CheckBox from "../../components/CheckBox";
-import CreateTransaction from "../../components/CreateTransaction";
+import CreateTransaction from "./CreateTransaction";
 
 import { IoIosAddCircle } from "react-icons/io";
 

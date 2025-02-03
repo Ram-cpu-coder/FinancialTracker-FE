@@ -2,8 +2,35 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import NewCustomInput from "../../components/NewCustomInput";
 
 const SignUp = () => {
+  const fields = [
+    {
+      label: "Full Name",
+      type: "text",
+      required: true,
+      placeholder: "Enter your Full Name...",
+    },
+    {
+      label: "Email",
+      type: "email",
+      required: true,
+      placeholder: "Enter your Email...",
+    },
+    {
+      label: "Password",
+      type: "password",
+      required: true,
+      placeholder: "Password",
+    },
+    {
+      label: "Confirm Password",
+      type: "password",
+      required: true,
+      placeholder: "Confirm Password",
+    },
+  ];
   return (
     <>
       <Navbar />
@@ -20,12 +47,24 @@ const SignUp = () => {
           </div>
 
           {/* Sign Up Form (below image in mobile view) */}
+
           <div className="w-full order-2 md:order-1 p-5 border rounded-lg m-2">
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
               Start Tracking Your Finances Today!
             </h2>
             <form>
-              <div className="mb-4">
+              {fields.map((item) => {
+                return (
+                  <NewCustomInput
+                    type={item.type}
+                    label={item.label}
+                    placeholder={item.placeholder}
+                    required={item.required}
+                  />
+                );
+              })}
+
+              {/* <div className="mb-4">
                 <label className="block text-gray-700">Full Name</label>
                 <input
                   type="text"
@@ -56,7 +95,7 @@ const SignUp = () => {
                   className="w-full p-2 border border-gray-300 rounded-lg"
                   placeholder="Confirm your password"
                 />
-              </div>
+              </div> */}
               <button
                 type="submit"
                 className="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 transition"
