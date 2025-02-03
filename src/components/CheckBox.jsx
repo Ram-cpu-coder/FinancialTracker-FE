@@ -58,6 +58,7 @@ const CheckBox = () => {
             <td className="my-auto">
               <label key={id}>
                 <input
+                  key={id}
                   type="checkbox"
                   checked={selectedIds.includes(id)}
                   onChange={() => handleCheckBoxChange(id)}

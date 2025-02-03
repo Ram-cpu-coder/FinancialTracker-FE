@@ -1,16 +1,14 @@
 import React from "react";
 
-const NewCustomInput = ({ label, type, placeholder, required }) => {
+const NewCustomInput = ({ label, ...item }) => {
   return (
     <div className="mb-4">
       <label htmlFor="" className="block text-gray-700">
         {label}
       </label>
       <input
-        type={type}
         className="w-full p-2 border border-gray-300 rounded-lg"
-        placeholder={placeholder}
-        required={required}
+        {...item}
       />
     </div>
   );

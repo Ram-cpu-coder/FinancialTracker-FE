@@ -1,34 +1,76 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import NewCustomInput from "../../components/NewCustomInput";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
+  const initialState = {
+    confirmPassword: "",
+    password: "",
+    username: "",
+    email: "",
+  };
+
+  const [form, setForm] = useState(initialState);
   const fields = [
     {
       label: "Full Name",
       type: "text",
       required: true,
-      placeholder: "Enter your Full Name...",
+      placeholder: "Ram Kumar Dhimal",
+      name: "username",
+      value: form.username,
     },
     {
       label: "Email",
       type: "email",
       required: true,
-      placeholder: "Enter your Email...",
+      placeholder: "ram@gmail.com",
+      name: "email",
+      value: form.email,
     },
     {
       label: "Password",
       type: "password",
       required: true,
       placeholder: "Password",
+      name: "password",
+      value: form.password,
     },
     {
       label: "Confirm Password",
       type: "password",
       required: true,
       placeholder: "Confirm Password",
+      name: "confirmPassword",
+      value: form.confirmPassword,
     },
   ];
+
+  const handleOnChange = async (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleOnSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:9000/api/v1/users/register",
+        form
+      );
+      console.log(response);
+      toast.success(response.data.message);
+      // accesstoken
+      // localStorage.setItem("accessToken", response.data.accessToken ); this one is for log in page
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+
   return (
     <>
       <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
@@ -49,15 +91,13 @@ const SignUp = () => {
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
               Start Tracking Your Finances Today!
             </h2>
-            <form>
+            <form onSubmit={handleOnSubmit}>
               {fields.map((item) => {
                 return (
                   <NewCustomInput
-                    key={item.label}
-                    type={item.type}
-                    label={item.label}
-                    placeholder={item.placeholder}
-                    required={item.required}
+                    key={item.name}
+                    {...item}
+                    onChange={handleOnChange}
                   />
                 );
               })}

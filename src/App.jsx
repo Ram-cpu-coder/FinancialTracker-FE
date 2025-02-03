@@ -6,6 +6,7 @@ import SignUp from "./pages/auth/SignUp";
 import DashBoard from "./pages/dashboard/DashBoard";
 import Transaction from "./pages/transaction/Transaction";
 import DefaultLayout from "./components/layout/DefaultLayout";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="transaction" element={<Transaction />} />
         </Route>
       </Routes>
+      <ToastContainer />
     </div>
   );
 }
