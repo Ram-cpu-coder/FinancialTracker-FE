@@ -1,22 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import NewCustomInput from "../../components/NewCustomInput";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Login = () => {
+  const initialState = {
+    email: "",
+    password: "",
+  };
+  const [form, setForm] = useState(initialState);
+
   const fields = [
     {
       label: "Email",
       type: "email",
       required: true,
-      placeholder: "Enter your Email...",
+      placeholder: "ram@gmail.com",
+      name: "email",
+      value: form.email,
     },
     {
       label: "Password",
       type: "password",
       required: true,
       placeholder: "Password",
+      name: "password",
+      value: form.password,
     },
   ];
+  const handleOnChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+  const handleOnSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await axios.post(
+        "http://localhost:9000/api/v1/users/login",
+        form
+      );
+      toast.success(response.data.message);
+      // accesstoken
+      localStorage.setItem("accessToken", response.data.accessToken);
+
+      setForm(initialState);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+
   return (
     <>
       <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
@@ -36,17 +69,9 @@ const Login = () => {
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
               Log In To Your Account
             </h2>
-            <form>
+            <form onSubmit={handleOnSubmit}>
               {fields.map((item) => {
-                return (
-                  <NewCustomInput
-                    key={item.label}
-                    type={item.type}
-                    label={item.label}
-                    placeholder={item.placeholder}
-                    required={item.required}
-                  />
-                );
+                return <NewCustomInput {...item} onChange={handleOnChange} />;
               })}
 
               <button

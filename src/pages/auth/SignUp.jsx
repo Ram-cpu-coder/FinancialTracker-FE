@@ -64,8 +64,7 @@ const SignUp = () => {
       );
       console.log(response);
       toast.success(response.data.message);
-      // accesstoken
-      // localStorage.setItem("accessToken", response.data.accessToken ); this one is for log in page
+      setForm(initialState);
     } catch (error) {
       toast.error(error.response.data.message);
     }
