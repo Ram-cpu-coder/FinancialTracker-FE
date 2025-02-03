@@ -2,8 +2,23 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import NewCustomInput from "../../components/NewCustomInput";
 
 const Login = () => {
+  const fields = [
+    {
+      label: "Email",
+      type: "email",
+      required: true,
+      placeholder: "Enter your Email...",
+    },
+    {
+      label: "Password",
+      type: "password",
+      required: true,
+      placeholder: "Password",
+    },
+  ];
   return (
     <>
       <Navbar />
@@ -25,7 +40,18 @@ const Login = () => {
               Log In To Your Account
             </h2>
             <form>
-              <div className="mb-4">
+              {fields.map((item) => {
+                return (
+                  <NewCustomInput
+                    type={item.type}
+                    label={item.label}
+                    placeholder={item.placeholder}
+                    required={item.required}
+                  />
+                );
+              })}
+
+              {/* <div className="mb-4">
                 <label className="block text-gray-700">Email</label>
                 <input
                   type="email"
@@ -40,7 +66,7 @@ const Login = () => {
                   className="w-full p-2 border border-gray-300 rounded-lg"
                   placeholder="Enter your password"
                 />
-              </div>
+              </div> */}
               <button
                 type="submit"
                 className="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 transition"
