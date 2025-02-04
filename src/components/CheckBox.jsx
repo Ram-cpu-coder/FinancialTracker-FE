@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-const CheckBox = () => {
+const CheckBox = ({ tranData }) => {
+  console.log("POP", tranData);
   const items = [
     {
       id: 1,
@@ -18,10 +19,10 @@ const CheckBox = () => {
   const [selectedIds, setSelectedIds] = useState([]);
 
   const handleSelectedAll = (e) => {
-    if (selectedIds.length === items.length) {
+    if (selectedIds.length === tranData.length) {
       setSelectedIds([]);
     } else {
-      setSelectedIds(items.map((item) => item.id));
+      setSelectedIds(tranData.map((item) => item._id));
     }
   };
 
@@ -39,7 +40,7 @@ const CheckBox = () => {
         <input
           type="checkbox"
           onChange={handleSelectedAll}
-          checked={selectedIds.length === items.length}
+          checked={selectedIds.length === tranData.length}
         />
         &nbsp;Select All
       </label>
@@ -52,18 +53,18 @@ const CheckBox = () => {
           <th>Out</th>
           <th>In</th>
         </tr>
-        {items.map(({ id, name }) => (
+        {tranData.map((item) => (
           <tr className="grid grid-cols-[50px_minmax(200px,_2fr)_1fr_1fr_1fr] text-left border-b py-2">
-            <td className="my-auto">{id}</td>
+            <td className="my-auto">{item._id}</td>
             <td className="my-auto">
-              <label key={id}>
+              <label key={item._id}>
                 <input
-                  key={id}
+                  key={item._id}
                   type="checkbox"
-                  checked={selectedIds.includes(id)}
-                  onChange={() => handleCheckBoxChange(id)}
+                  checked={selectedIds.includes(item._id)}
+                  onChange={() => handleCheckBoxChange(item._id)}
                 />
-                &nbsp;{name}
+                &nbsp;{item.name}
               </label>
             </td>
             <td className="my-auto">DATE</td>

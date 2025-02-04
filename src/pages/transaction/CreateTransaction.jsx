@@ -3,7 +3,7 @@ import { IoCloseOutline } from "react-icons/io5";
 
 const CreateTransaction = ({ setToggleTransactionBox }) => {
   return (
-    <div className="h-screen w-full flex justify-center items-center">
+    <div className="h-full w-full flex justify-center items-center">
       <div className="bg-white rounded-lg p-5 border h-[auto] w-[40%] addTransactionMediaQuery">
         <span
           onClick={() => setToggleTransactionBox(false)}
@@ -13,7 +13,7 @@ const CreateTransaction = ({ setToggleTransactionBox }) => {
         </span>
         <hr className="my-3" />
         {/* form transaction creation */}
-        <div className="w-full p-3 border rounded-lg">
+        <div className="w-full h-full p-3 border rounded-lg">
           <h1 className="text-3xl font-bold mb-5 text-center">
             Add a Transaction !
           </h1>

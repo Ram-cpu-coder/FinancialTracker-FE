@@ -7,8 +7,21 @@ import DashBoard from "./pages/dashboard/DashBoard";
 import Transaction from "./pages/transaction/Transaction";
 import DefaultLayout from "./components/layout/DefaultLayout";
 import { ToastContainer } from "react-toastify";
+import { Auth } from "./pages/auth/Auth";
+import { useEffect } from "react";
+import { useUser } from "./context/UserContext";
 
 function App() {
+  const { autoLogin, user } = useUser();
+
+  const loginFromToken = async () => {
+    return await autoLogin();
+  };
+
+  useEffect(() => {
+    !user._id && loginFromToken();
+  }, [user._id]);
+
   return (
     <div>
       <Routes>
@@ -16,8 +29,22 @@ function App() {
           <Route path="" element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<SignUp />} />
-          <Route path="dashboard" element={<DashBoard />} />
-          <Route path="transaction" element={<Transaction />} />
+          <Route
+            path="dashboard"
+            element={
+              <Auth>
+                <DashBoard />
+              </Auth>
+            }
+          />
+          <Route
+            path="transaction"
+            element={
+              <Auth>
+                <Transaction />
+              </Auth>
+            }
+          />
         </Route>
       </Routes>
       <ToastContainer />

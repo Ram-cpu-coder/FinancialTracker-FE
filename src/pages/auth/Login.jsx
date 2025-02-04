@@ -1,15 +1,20 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import NewCustomInput from "../../components/NewCustomInput";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../../context/UserContext";
 
 const Login = () => {
+  const { setUser, isLogged, setIsLogged, user } = useUser();
   const initialState = {
     email: "",
     password: "",
   };
   const [form, setForm] = useState(initialState);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const fields = [
     {
@@ -29,6 +34,13 @@ const Login = () => {
       value: form.password,
     },
   ];
+
+  const goTo = location?.state?.from?.pathname || "/dashboard";
+
+  useEffect(() => {
+    user?._id && navigate(goTo);
+  }, [user._id]);
+
   const handleOnChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -41,10 +53,15 @@ const Login = () => {
         form
       );
       toast.success(response.data.message);
-      // accesstoken
+      // accesstoken storing in local storage
       localStorage.setItem("accessToken", response.data.accessToken);
-
+      console.log(response);
+      // nagivation to the private apis
+      setUser(response.data.user);
+      setIsLogged(true);
       setForm(initialState);
+
+      navigate("/dashboard");
     } catch (error) {
       toast.error(error.response.data.message);
     }
@@ -71,7 +88,13 @@ const Login = () => {
             </h2>
             <form onSubmit={handleOnSubmit}>
               {fields.map((item) => {
-                return <NewCustomInput {...item} onChange={handleOnChange} />;
+                return (
+                  <NewCustomInput
+                    key={item.name}
+                    {...item}
+                    onChange={handleOnChange}
+                  />
+                );
               })}
 
               <button

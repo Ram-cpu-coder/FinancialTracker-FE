@@ -3,9 +3,11 @@ import BarChart from "../../components/graphs/BarChart";
 import DoughnutGraph from "../../components/graphs/DoughnutGraph";
 import LineIncome from "../../components/graphs/LineIncome";
 import LineExpense from "../../components/graphs/LineExpense";
+import { useUser } from "../../context/UserContext";
 
 const DashBoard = () => {
-  return (
+  const { user } = useUser();
+  return user._id ? (
     <div className="w-full bg-gray-800">
       <div className="w-full flex justify-center">
         <div className="flex justify-center flex-col p-5 md:w-[80%] w-full">
@@ -77,6 +79,8 @@ const DashBoard = () => {
         </div>
       </div>
     </div>
+  ) : (
+    ""
   );
 };
 

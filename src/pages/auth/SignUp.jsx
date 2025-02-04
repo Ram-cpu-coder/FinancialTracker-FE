@@ -62,7 +62,7 @@ const SignUp = () => {
         "http://localhost:9000/api/v1/users/register",
         form
       );
-      console.log(response);
+      // console.log(response);
       toast.success(response.data.message);
       setForm(initialState);
     } catch (error) {
