@@ -67,7 +67,7 @@ const DashBoard = () => {
           </div>
 
           {/* graphs */}
-          <div className="flex md:justify-between p-3 lg:flex-wrap flex-nowrap lg:justify-center lg:gap-10 md:flex-row flex-col justify-center gap-1">
+          <div className="flex md:justify-between p-3 lg:justify-center lg:gap-10 md:flex-row flex-col justify-center gap-1">
             {/* <BarChart /> */}
             <DoughnutGraph />
             <LineIncome />

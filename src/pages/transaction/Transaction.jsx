@@ -38,7 +38,7 @@ const Transaction = () => {
             <hr className="my-5" />
             <div className="flex justify-between py-2 barForTransaction">
               <div className="flex justify-between w-[60%]">
-                <p> 1 transaction(s) found!</p>
+                <p>{tranData.length} transaction(s) found!</p>
                 <input
                   type="text"
                   placeholder="Search transactions..."

@@ -53,9 +53,11 @@ const Login = () => {
         form
       );
       toast.success(response.data.message);
+
       // accesstoken storing in local storage
       localStorage.setItem("accessToken", response.data.accessToken);
       console.log(response);
+
       // nagivation to the private apis
       setUser(response.data.user);
       setIsLogged(true);
