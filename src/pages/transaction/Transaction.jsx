@@ -25,7 +25,6 @@ const Transaction = () => {
     );
     setTranData(response.data.transactionData);
   };
-  console.log(tranData);
   useEffect(() => {
     transactionData();
   }, []);

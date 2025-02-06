@@ -16,7 +16,6 @@ export const UserProvider = ({ children }) => {
 
   const autoLogin = async () => {
     const accessToken = localStorage.getItem("accessToken");
-    console.log(accessToken);
 
     if (accessToken) {
       const response = await axios.get("http://localhost:9000/api/v1/users", {
