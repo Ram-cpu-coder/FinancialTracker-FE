@@ -32,7 +32,7 @@ const Navbar = () => {
   return user?._id ? (
     isMobile ? (
       <nav className="bg-blue-600 p-2 text-white shadow-md w-full flex justify-center">
-        <div className="flex items-center justify-between w-[90%]">
+        <div className="flex items-center justify-between w-[90%] z-1">
           {/* Logo */}
           <Link to="/">
             <div className="text-2xl font-bold">FinTrack</div>
@@ -77,7 +77,7 @@ const Navbar = () => {
       </nav>
     ) : (
       <nav className="bg-blue-600 p-2 text-white shadow-md w-full flex justify-center">
-        <div className="flex items-center justify-between w-[90%]">
+        <div className="flex items-center justify-between w-[90%] z-1">
           {/* Logo */}
           <Link to="/">
             <div className="text-2xl font-bold">FinTrack</div>
@@ -108,7 +108,7 @@ const Navbar = () => {
     )
   ) : isMobile ? (
     <nav className="bg-blue-600 p-2 text-white shadow-md w-full flex justify-center">
-      <div className="flex items-center justify-between w-[90%]">
+      <div className="flex items-center justify-between w-[90%] z-1">
         {/* Logo */}
         <Link to="/">
           <div className="text-2xl font-bold">FinTrack</div>
@@ -143,7 +143,7 @@ const Navbar = () => {
     </nav>
   ) : (
     <nav className="bg-blue-600 p-2 text-white shadow-md w-full flex justify-center">
-      <div className="flex items-center justify-between w-[90%]">
+      <div className="flex items-center justify-between w-[90%] z-1">
         {/* Logo */}
         <Link to="/">
           <div className="text-2xl font-bold">FinTrack</div>
