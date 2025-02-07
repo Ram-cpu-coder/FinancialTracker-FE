@@ -52,6 +52,7 @@ const Login = () => {
         "http://localhost:9000/api/v1/users/login",
         form
       );
+
       toast.success(response.data.message);
 
       // accesstoken storing in local storage
@@ -65,7 +66,11 @@ const Login = () => {
 
       navigate("/dashboard");
     } catch (error) {
-      toast.error(error.response.data.message);
+      if (!form.email && !form.password) {
+        toast.error("Fill the Form!!!");
+      } else {
+        toast.error(error.response.data.message);
+      }
     }
   };
 
