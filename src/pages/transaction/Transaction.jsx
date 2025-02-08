@@ -6,7 +6,7 @@ import axios from "axios";
 
 import { IoIosAddCircle } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
-import { HashLoader } from "react-spinners";
+import { GridLoader } from "react-spinners";
 
 const Transaction = () => {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -52,23 +52,23 @@ const Transaction = () => {
           <div className="px-5 py-10 my-5 bg-gray-800 text-white min-h-[60vh] w-[80%] rounded-lg transactionMediaQuery">
             <hr className="my-5" />
             <div className="flex justify-between py-2 barForTransaction w-full">
-              <div className="flex justify-between w-[40%]">
+              <div className="flex justify-between items-center w-[50%]">
                 <p>{tranData.length} transaction(s) found!</p>
                 <input
                   type="text"
                   placeholder="Search transactions..."
-                  className="outline bg-white text-black px-3 rounded-lg"
+                  className="outline bg-white text-black px-3 py-1 rounded-lg"
                 />
               </div>
               <div className="flex justify-between w-[40%]">
                 <button
-                  className="flex items-center gap-2 py-2 px-5 rounded-lg bg-blue-600 active:bg-blue-800 cursor-pointer"
+                  className="flex items-center gap-2 py-1 px-5 rounded-lg bg-blue-600 active:bg-blue-800 cursor-pointer"
                   onClick={openTransaction}
                 >
                   <IoIosAddCircle /> Add
                 </button>
                 <button
-                  className="flex items-center gap-2 py-2 px-5 rounded-lg bg-red-600 active:bg-red-800 cursor-pointer"
+                  className="flex items-center gap-2 py-1 px-5 rounded-lg bg-red-600 active:bg-red-800 cursor-pointer"
                   onClick={delTransactionButton}
                 >
                   <MdDelete /> Delete
@@ -117,7 +117,7 @@ const Transaction = () => {
       </div>
       {isLoading && (
         <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
-          <HashLoader color="#0d6bc9" loading size={100} speedMultiplier={1} />
+          <GridLoader color="#0d6bc9" speedMultiplier={1} />
         </div>
       )}
     </div>

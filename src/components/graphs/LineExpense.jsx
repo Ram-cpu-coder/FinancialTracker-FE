@@ -22,13 +22,13 @@ ChartJS.register(
   Legend
 );
 
-const LineExpense = () => {
+const LineExpense = ({ expense }) => {
   const data = {
-    labels: ["January", "February", "March", "April", "May", "June"],
+    labels: [""],
     datasets: [
       {
         label: "Expense",
-        data: [933, 324, 345, 13, 232, 141],
+        data: [expense],
         fill: false,
         backgroundColor: "#d75b5b",
         borderColor: "#d75b5b",
@@ -50,7 +50,7 @@ const LineExpense = () => {
       x: {
         title: {
           display: true,
-          text: "Months", // X-axis label
+          text: "", // X-axis label
         },
       },
       y: {

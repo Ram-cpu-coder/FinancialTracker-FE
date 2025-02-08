@@ -22,13 +22,13 @@ ChartJS.register(
   Legend
 );
 
-const LineIncome = () => {
+const LineIncome = ({ income }) => {
   const data = {
-    labels: ["January", "February", "March", "April", "May", "June"],
+    labels: [""],
     datasets: [
       {
         label: "Income",
-        data: [933, 324, 345, 13, 232, 141],
+        data: [income],
         fill: false,
         backgroundColor: "#026617",
         borderColor: "#026617",
@@ -51,7 +51,7 @@ const LineIncome = () => {
       x: {
         title: {
           display: true,
-          text: "Months", // X-axis label
+          text: "", // X-axis label
         },
       },
       y: {

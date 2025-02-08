@@ -5,7 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
-import { HashLoader } from "react-spinners";
+import { GridLoader } from "react-spinners";
 
 const Login = () => {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -127,13 +127,8 @@ const Login = () => {
         </div>
         {isLoading && (
           <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
-            <div className="rounded-full h-12 w-12 border-t-2 border-b-2 border-white">
-              <HashLoader
-                color="#0d6bc9"
-                loading
-                size={100}
-                speedMultiplier={1}
-              />
+            <div>
+              <GridLoader color="#0d6bc9" speedMultiplier={1} />
             </div>
           </div>
         )}

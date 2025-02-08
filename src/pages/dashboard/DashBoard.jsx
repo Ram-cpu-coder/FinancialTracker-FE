@@ -1,12 +1,56 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import BarChart from "../../components/graphs/BarChart";
 import DoughnutGraph from "../../components/graphs/DoughnutGraph";
 import LineIncome from "../../components/graphs/LineIncome";
 import LineExpense from "../../components/graphs/LineExpense";
 import { useUser } from "../../context/UserContext";
+import { GridLoader } from "react-spinners";
 
 const DashBoard = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorBox, setErrorBox] = useState(false);
+  const [tranData, setTranData] = useState([]);
+  const [incomeType, setIncomeType] = useState([]);
+  const [expenseType, setExpenseType] = useState([]);
   const { user } = useUser();
+
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+  const transactionData = async () => {
+    try {
+      setIsLoading(true);
+      const accessToken = localStorage.getItem("accessToken");
+      const response = await axios.get(`${API_BASE_URL}/transactions`, {
+        headers: {
+          Authorization: accessToken,
+        },
+      });
+      setTranData(response.data.transactionData);
+      const filteredIncome = await response.data.transactionData.filter(
+        (item) => item.type === "Income"
+      );
+      const filteredExpense = await response.data.transactionData.filter(
+        (item) => item.type === "Expense"
+      );
+      setExpenseType(filteredExpense);
+      setIncomeType(filteredIncome);
+      setIsLoading(false);
+    } catch (error) {
+      setErrorBox(true);
+    }
+  };
+
+  const totalIncome = incomeType.reduce((acc, item) => {
+    return (acc += item.amount);
+  }, 0);
+
+  const totalExpense = Math.abs(
+    expenseType.reduce((acc, item) => (acc += item.amount), 0)
+  );
+  useEffect(() => {
+    transactionData();
+  }, []);
   return user._id ? (
     <div className="w-full bg-gray-800">
       <div className="w-full flex justify-center">
@@ -27,9 +71,12 @@ const DashBoard = () => {
                 />
               </div>
               <div className="flex flex-col w-full justify-start">
-                <p>Balance</p>
+                <p className="font-bold">Balance</p>
                 <hr />
-                <p>amount</p>
+                <p>
+                  {" "}
+                  ${tranData.reduce((acc, item) => (acc += item.amount), 0)}
+                </p>
               </div>
             </div>
             {/* income */}
@@ -43,9 +90,9 @@ const DashBoard = () => {
                 />
               </div>
               <div className="flex flex-col w-full justify-start">
-                <p>Income</p>
+                <p className="font-bold">Income</p>
                 <hr />
-                <p>amount</p>
+                <p>${totalIncome}</p>
               </div>
             </div>
             {/* Expense */}
@@ -59,9 +106,9 @@ const DashBoard = () => {
                 />
               </div>
               <div className="flex flex-col w-full justify-start">
-                <p>Expense</p>
+                <p className="font-bold">Expense</p>
                 <hr />
-                <p>amount</p>
+                <p>${totalExpense}</p>
               </div>
             </div>
           </div>
@@ -69,15 +116,20 @@ const DashBoard = () => {
           {/* graphs */}
           <div className="flex md:justify-between p-3 lg:justify-center lg:gap-10 md:flex-row flex-col justify-center gap-1">
             {/* <BarChart /> */}
-            <DoughnutGraph />
-            <LineIncome />
-            <LineExpense />
+            <DoughnutGraph income={totalIncome} expense={totalExpense} />
+            <LineIncome income={totalIncome} />
+            <LineExpense expense={totalExpense} />
           </div>
           <div className="p-3">
-            <BarChart />
+            <BarChart income={totalIncome} expense={totalExpense} />
           </div>
         </div>
       </div>
+      {isLoading && (
+        <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
+          <GridLoader color="#0d6bc9" speedMultiplier={1} />
+        </div>
+      )}
     </div>
   ) : (
     ""

@@ -13,13 +13,13 @@ import {
 // registering the chart components
 ChartJS.register(ArcElement, CategoryScale, LinearScale, Tooltip, Legend);
 
-const DoughnutGraph = () => {
+const DoughnutGraph = ({ income, expense }) => {
   const data = {
     labels: ["Expense", "Income"],
     datasets: [
       {
         label: "# of Amount",
-        data: [300, 50], // data for each section
+        data: [expense, income], // data for each section
         backgroundColor: ["#d75b5b", "#026617"], //colors for each section
         borderColor: ["#FF6384", "#36A2EB"],
         borderWidth: 1,

@@ -5,6 +5,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { IoMdClose } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
+import Dashboard from "../../pages/dashboard/DashBoard";
 
 const Navbar = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -34,9 +35,10 @@ const Navbar = () => {
       <nav className="bg-blue-600 p-2 text-white shadow-md w-full flex justify-center">
         <div className="flex items-center justify-between w-[90%] z-1">
           {/* Logo */}
-          <Link to="/">
+          <Link to={isLogged ? "/dashboard" : "/"}>
             <div className="text-2xl font-bold">FinTrack</div>
           </Link>
+
           {/* Buttons */}
           <div className="flex space-x-4" onClick={toggleMenu}>
             {isOpen ? <IoMdClose size={24} /> : <RxHamburgerMenu size={24} />}
@@ -79,7 +81,7 @@ const Navbar = () => {
       <nav className="bg-blue-600 p-2 text-white shadow-md w-full flex justify-center">
         <div className="flex items-center justify-between w-[90%] z-1">
           {/* Logo */}
-          <Link to="/">
+          <Link to={isLogged ? "/dashboard" : "/"}>
             <div className="text-2xl font-bold">FinTrack</div>
           </Link>
           {/* Buttons */}

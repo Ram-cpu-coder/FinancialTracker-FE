@@ -20,7 +20,7 @@ ChartJS.register(
   Legend
 );
 
-const BarChart = () => {
+const BarChart = ({ income, expense }) => {
   const data = {
     labels: ["January", "February", "March", "April", "May"],
     datasets: [

@@ -2,9 +2,13 @@ import axios from "axios";
 import React, { useState } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
+import { GridLoader } from "react-spinners";
+import { use } from "react";
 
 const CreateTransaction = ({ setToggleTransactionBox }) => {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const initialState = {
     type: "",
@@ -21,6 +25,7 @@ const CreateTransaction = ({ setToggleTransactionBox }) => {
   const handleOnSubmit = async (event) => {
     event.preventDefault();
     try {
+      setIsLoading(true);
       const accessToken = localStorage.getItem("accessToken");
       const response = await axios.post(
         `${API_BASE_URL}/transactions/add`,
@@ -31,6 +36,7 @@ const CreateTransaction = ({ setToggleTransactionBox }) => {
           },
         }
       );
+      setIsLoading(false);
       console.log(response);
       toast.success("TRANSACTION ADDED");
       setForm(initialState);
@@ -41,7 +47,7 @@ const CreateTransaction = ({ setToggleTransactionBox }) => {
     }
   };
   return (
-    <div className="h-full w-full flex justify-center items-center">
+    <div className="h-full w-full flex justify-center items-center relative">
       <div className="bg-white rounded-lg p-5 border h-[auto] w-[40%] addTransactionMediaQuery">
         <span
           onClick={() => setToggleTransactionBox(false)}
@@ -118,6 +124,13 @@ const CreateTransaction = ({ setToggleTransactionBox }) => {
           </div>
         </form>
       </div>
+      {isLoading && (
+        <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
+          <div>
+            <GridLoader color="#0d6bc9" speedMultiplier={1} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
