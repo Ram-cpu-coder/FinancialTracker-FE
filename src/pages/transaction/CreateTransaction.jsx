@@ -4,6 +4,8 @@ import { IoCloseOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
 
 const CreateTransaction = ({ setToggleTransactionBox }) => {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
   const initialState = {
     type: "",
     amount: "",
@@ -21,7 +23,7 @@ const CreateTransaction = ({ setToggleTransactionBox }) => {
     try {
       const accessToken = localStorage.getItem("accessToken");
       const response = await axios.post(
-        "http://localhost:9000/api/v1/transactions/add",
+        `${API_BASE_URL}/transactions/add`,
         form,
         {
           headers: {
@@ -31,6 +33,7 @@ const CreateTransaction = ({ setToggleTransactionBox }) => {
       );
       console.log(response);
       toast.success("TRANSACTION ADDED");
+      setForm(initialState);
     } catch (error) {
       console.log(error);
       console.log("WE GOT ERROR");

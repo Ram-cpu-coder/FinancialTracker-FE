@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 
-const CheckBox = ({ tranData }) => {
+const CheckBox = ({ tranData, selectedIds, setSelectedIds }) => {
   const formattedTranData = tranData.map((item) => ({
     ...item,
     createdAt: new Date(item.createdAt).toLocaleDateString("en-CA"),
   }));
-
-  const [selectedIds, setSelectedIds] = useState([]);
 
   const handleSelectedAll = () => {
     if (selectedIds.length === tranData.length) {

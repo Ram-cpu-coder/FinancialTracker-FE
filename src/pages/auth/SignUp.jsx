@@ -5,6 +5,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const SignUp = () => {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
   const initialState = {
     confirmPassword: "",
     password: "",
@@ -58,13 +60,9 @@ const SignUp = () => {
   const handleOnSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:9000/api/v1/users/register",
-        form
-      );
+      const response = await axios.post(`${API_BASE_URL}/users/register`, form);
       // console.log(response);
       toast.success(response.data.message);
-      setForm(initialState);
     } catch (error) {
       toast.error(error.response.data.message);
     }

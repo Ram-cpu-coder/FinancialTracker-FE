@@ -6,6 +6,8 @@ const UserContext = React.createContext();
 
 // providers nedded so creating it , it is a function
 export const UserProvider = ({ children }) => {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
   const [user, setUser] = useState({});
   const [isLogged, setIsLogged] = useState(false);
 
@@ -18,7 +20,7 @@ export const UserProvider = ({ children }) => {
     const accessToken = localStorage.getItem("accessToken");
 
     if (accessToken) {
-      const response = await axios.get("http://localhost:9000/api/v1/users", {
+      const response = await axios.get(`${API_BASE_URL}/users`, {
         headers: {
           Authorization: accessToken,
         },

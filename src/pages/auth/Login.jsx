@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
 
 const Login = () => {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
   const { setUser, isLogged, setIsLogged, user } = useUser();
   const initialState = {
     email: "",
@@ -48,10 +50,7 @@ const Login = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post(
-        "http://localhost:9000/api/v1/users/login",
-        form
-      );
+      const response = await axios.post(`${API_BASE_URL}/users/login`, form);
 
       toast.success(response.data.message);
 
@@ -78,7 +77,7 @@ const Login = () => {
     <>
       <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
         {/* Container for Form and Image */}
-        <div className="flex flex-col bg-white rounded-lg shadow-md overflow-hidden w-full max-w-5xl flex-col md:flex-row">
+        <div className="flex flex-col bg-white rounded-lg shadow-md w-full max-w-5xl  md:flex-row md:justify-center justify-center">
           {/* Image (on top in mobile view) */}
           <div className="w-full order-1 md:order-2 flex justify-center">
             <img
@@ -89,7 +88,7 @@ const Login = () => {
           </div>
 
           {/* Login Form (below image in mobile view) */}
-          <div className="w-full order-2 md:order-1 p-5 border rounded-lg m-5">
+          <div className="w-[90%] order-2 md:order-1 p-5 border rounded-lg m-5">
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
               Log In To Your Account
             </h2>
