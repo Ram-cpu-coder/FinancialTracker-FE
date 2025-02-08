@@ -2,27 +2,45 @@ import React, { useState } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { HashLoader } from "react-spinners";
 
 const DeleteTransaction = ({ selectedIds, setToggleDeleteBox }) => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const delTransaction = async (selectedIds) => {
+  const delTransaction = async () => {
+    const accessToken = localStorage.getItem("accessToken");
     try {
+      setIsLoading(true);
+
+      //   calling delete API
       const deletedItem = await axios.delete(
-        `${API_BASE_URL}/transactions/delete/${selectedIds}`
+        `${API_BASE_URL}/transactions/delete`,
+        {
+          headers: {
+            Authorization: accessToken,
+            "Content-Type": "application/json",
+          },
+          data: {
+            transactionsID: selectedIds,
+          },
+        }
       );
+      console.log(selectedIds);
+      console.log(deletedItem);
       //   loader
-      if (!deletedItem) {
-        setIsLoading(true);
-      } else {
-        setIsLoading(false);
+      setIsLoading(false);
+      if (deletedItem) {
         toast.success("Deleted successfully!!!");
         console.log(deletedItem);
       }
     } catch (error) {
-      toast.error(
-        error.response?.data?.error || "Failed to delete transaction"
-      );
+      setIsLoading(false);
+      //   checking accessToken
+      if (!accessToken) {
+        return toast.error("Not Authorised !!!");
+      } else {
+        return toast.error("Failed to delete transaction");
+      }
     }
   };
 
@@ -46,7 +64,7 @@ const DeleteTransaction = ({ selectedIds, setToggleDeleteBox }) => {
           <div className="flex justify-center gap-4">
             <button
               className="p-2 rounded-lg bg-red-600 active:bg-red-800 cursor-pointer text-white text-sm md:text-base"
-              onClick={() => delTransaction(selectedIds)}
+              onClick={delTransaction}
             >
               Yes, Delete
             </button>
@@ -61,7 +79,14 @@ const DeleteTransaction = ({ selectedIds, setToggleDeleteBox }) => {
       </div>
       {isLoading && (
         <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white">
+            <HashLoader
+              color="#0d6bc9"
+              loading
+              size={100}
+              speedMultiplier={1}
+            />
+          </div>
         </div>
       )}
     </div>

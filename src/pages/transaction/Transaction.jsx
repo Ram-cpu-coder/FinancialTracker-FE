@@ -6,6 +6,7 @@ import axios from "axios";
 
 import { IoIosAddCircle } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
+import { HashLoader } from "react-spinners";
 
 const Transaction = () => {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -14,6 +15,8 @@ const Transaction = () => {
   const [toggleDeleteBox, setToggleDeleteBox] = useState(false);
   const [tranData, setTranData] = useState([]);
   const [selectedIds, setSelectedIds] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorBox, setErrorBox] = useState(false);
 
   const openTransaction = () => {
     return setToggleTransactionBox(true);
@@ -23,13 +26,19 @@ const Transaction = () => {
   };
 
   const transactionData = async () => {
-    const accessToken = localStorage.getItem("accessToken");
-    const response = await axios.get(`${API_BASE_URL}/transactions`, {
-      headers: {
-        Authorization: accessToken,
-      },
-    });
-    setTranData(response.data.transactionData);
+    try {
+      setIsLoading(true);
+      const accessToken = localStorage.getItem("accessToken");
+      const response = await axios.get(`${API_BASE_URL}/transactions`, {
+        headers: {
+          Authorization: accessToken,
+        },
+      });
+      setIsLoading(false);
+      setTranData(response.data.transactionData);
+    } catch (error) {
+      setErrorBox(true);
+    }
   };
 
   useEffect(() => {
@@ -37,9 +46,9 @@ const Transaction = () => {
   }, []);
 
   return (
-    <div>
-      <div className="flex justify-center relative">
-        <div className="flex justify-center w-full bg-white min-h-full">
+    <div className="relative">
+      <div className="flex justify-center">
+        <div className="flex justify-center relative w-full bg-white min-h-full">
           <div className="px-5 py-10 my-5 bg-gray-800 text-white min-h-[60vh] w-[80%] rounded-lg transactionMediaQuery">
             <hr className="my-5" />
             <div className="flex justify-between py-2 barForTransaction w-full">
@@ -70,6 +79,7 @@ const Transaction = () => {
               tranData={tranData}
               selectedIds={selectedIds}
               setSelectedIds={setSelectedIds}
+              className="w-full"
             />
           </div>
 
@@ -96,12 +106,20 @@ const Transaction = () => {
                 style={{ backgroundColor: "rgba(0, 0, 0, 0.7)" }}
               ></div>
               <div className="absolute sm:top-0 top-[-250px] md:top-[-150px] w-full h-full">
-                <DeleteTransaction setToggleDeleteBox={setToggleDeleteBox} />
+                <DeleteTransaction
+                  setToggleDeleteBox={setToggleDeleteBox}
+                  selectedIds={selectedIds}
+                />
               </div>
             </>
           )}
         </div>
       </div>
+      {isLoading && (
+        <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
+          <HashLoader color="#0d6bc9" loading size={100} speedMultiplier={1} />
+        </div>
+      )}
     </div>
   );
 };

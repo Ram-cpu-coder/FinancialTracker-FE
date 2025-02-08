@@ -5,11 +5,13 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
+import { HashLoader } from "react-spinners";
 
 const Login = () => {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const { setUser, isLogged, setIsLogged, user } = useUser();
+  const [isLoading, setIsLoading] = useState(false);
   const initialState = {
     email: "",
     password: "",
@@ -48,12 +50,13 @@ const Login = () => {
   };
   const handleOnSubmit = async (event) => {
     event.preventDefault();
-
+    setIsLoading(true);
     try {
       const response = await axios.post(`${API_BASE_URL}/users/login`, form);
 
       toast.success(response.data.message);
 
+      setIsLoading(false);
       // accesstoken storing in local storage
       localStorage.setItem("accessToken", response.data.accessToken);
       console.log(response);
@@ -122,6 +125,18 @@ const Login = () => {
             </div>
           </div>
         </div>
+        {isLoading && (
+          <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
+            <div className="rounded-full h-12 w-12 border-t-2 border-b-2 border-white">
+              <HashLoader
+                color="#0d6bc9"
+                loading
+                size={100}
+                speedMultiplier={1}
+              />
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

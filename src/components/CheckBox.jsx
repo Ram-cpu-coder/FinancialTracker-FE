@@ -21,9 +21,10 @@ const CheckBox = ({ tranData, selectedIds, setSelectedIds }) => {
         : [...prev, id]
     );
   };
+  console.log(selectedIds);
 
   return (
-    <div className="mt-4 overflow-x-scroll">
+    <div className="mt-4 overflow-x-scroll px-20">
       <label>
         <input
           type="checkbox"
@@ -33,7 +34,7 @@ const CheckBox = ({ tranData, selectedIds, setSelectedIds }) => {
         &nbsp;Select All
       </label>
       {/* list of transactions */}
-      <table className="min-w-[1050px] mt-4">
+      <table className="min-w-[1050px] mt-9">
         <tr className="grid grid-cols-[60px_minmax(200px,_2fr)_1fr_1fr_1fr] text-left border-b py-2">
           <th>#</th>
           <th className="text-left">Title</th>
