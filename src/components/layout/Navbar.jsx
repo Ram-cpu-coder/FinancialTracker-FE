@@ -44,9 +44,9 @@ const Navbar = () => {
           <ul
             className={`${
               isOpen ? "absolute" : "hidden"
-            } top-[45px] left-0 bg-blue-600  p-2 text-white shadow-md w-full `}
+            } top-[45px] left-0 bg-blue-600  p-2 text-white shadow-md w-full flex justify-center`}
           >
-            <div className="w-[90%] flex justify-end gap-10">
+            <div className="w-[90%] flex sm:justify-end justify-center items-center sm:flex-row flex-col gap-10">
               <li>
                 <Link to={isLogged ? "/dashboard" : "/"}>
                   <button className="bg-transparent border border-white px-4 py-2 rounded-lg hover:bg-white hover:text-blue-600 transition flex items-center gap-2">

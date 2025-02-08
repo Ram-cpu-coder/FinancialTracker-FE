@@ -6,40 +6,41 @@ import { HashLoader } from "react-spinners";
 
 const DeleteTransaction = ({ selectedIds, setToggleDeleteBox }) => {
   const [isLoading, setIsLoading] = useState(false);
-
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const delTransaction = async () => {
     const accessToken = localStorage.getItem("accessToken");
     try {
+      console.log(100, selectedIds);
       setIsLoading(true);
 
       //   calling delete API
-      const deletedItem = await axios.delete(
-        `${API_BASE_URL}/transactions/delete`,
-        {
-          headers: {
-            Authorization: accessToken,
-            "Content-Type": "application/json",
-          },
-          data: {
-            transactionsID: selectedIds,
-          },
-        }
-      );
-      console.log(selectedIds);
-      console.log(deletedItem);
+      const deletedItem = await axios.delete(`${API_BASE_URL}/transactions`, {
+        headers: {
+          Authorization: accessToken,
+          "Content-Type": "application/json",
+        },
+        data: {
+          transactionsID: selectedIds,
+        },
+      });
+      toast.success("Deleted successfully!!!");
       //   loader
       setIsLoading(false);
-      if (deletedItem) {
-        toast.success("Deleted successfully!!!");
-        console.log(deletedItem);
-      }
+      console.log(deletedItem);
     } catch (error) {
       setIsLoading(false);
+      console.log(error);
       //   checking accessToken
       if (!accessToken) {
         return toast.error("Not Authorised !!!");
+      }
+      if (error.response) {
+        return (
+          toast.error(error.response?.data?.message) ||
+          "Failed to delete transaction"
+        );
       } else {
-        return toast.error("Failed to delete transaction");
+        toast.error("Failed to connect to Server!");
       }
     }
   };

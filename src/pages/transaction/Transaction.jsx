@@ -91,7 +91,7 @@ const Transaction = () => {
                 className="absolute top-0 min-w-full min-h-full"
                 style={{ backgroundColor: "rgba(0, 0, 0, 0.7)" }}
               ></div>
-              <div className="absolute sm:top-0 top-[-250px] md:top-[-150px] w-full h-full">
+              <div className="absolute sm:top-0 top-[-250px] md:top-0 w-full min-h-screen py-[10px`]">
                 <CreateTransaction
                   setToggleTransactionBox={setToggleTransactionBox}
                 />
@@ -105,7 +105,7 @@ const Transaction = () => {
                 className="absolute top-0 min-w-full min-h-full"
                 style={{ backgroundColor: "rgba(0, 0, 0, 0.7)" }}
               ></div>
-              <div className="absolute sm:top-0 top-[-250px] md:top-[-150px] w-full h-full">
+              <div className="absolute sm:top-10 top-[-100px] md:top-[-50px] w-full h-full">
                 <DeleteTransaction
                   setToggleDeleteBox={setToggleDeleteBox}
                   selectedIds={selectedIds}
