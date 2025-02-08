@@ -95,7 +95,7 @@ const Login = () => {
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
               Log In To Your Account
             </h2>
-            <form onSubmit={handleOnSubmit} onTouchStart={handleOnSubmit}>
+            <form onSubmit={handleOnSubmit}>
               {fields.map((item) => {
                 return (
                   <NewCustomInput
