@@ -79,7 +79,7 @@ const Login = () => {
 
   return (
     <>
-      <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+      <div className="min-h-screen flex items-center relative justify-center bg-gray-100 p-4">
         {/* Container for Form and Image */}
         <div className="flex flex-col bg-white rounded-lg shadow-md w-full max-w-5xl  md:flex-row md:justify-center justify-center">
           {/* Image (on top in mobile view) */}
