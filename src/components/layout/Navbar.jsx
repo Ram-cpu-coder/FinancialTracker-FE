@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { FaSignInAlt } from "react-icons/fa";
-import { FaEdit } from "react-icons/fa";
-import { RxHamburgerMenu } from "react-icons/rx";
-import { IoMdClose } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
-import Dashboard from "../../pages/dashboard/DashBoard";
+
+import { FaEdit } from "react-icons/fa";
+import { FaSignInAlt } from "react-icons/fa";
+import { IoMdClose } from "react-icons/io";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { RxDashboard } from "react-icons/rx";
+import { RiLogoutBoxRLine } from "react-icons/ri";
+import { GrTransaction } from "react-icons/gr";
 
 const Navbar = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -52,14 +55,14 @@ const Navbar = () => {
               <li>
                 <Link to={isLogged ? "/dashboard" : "/"}>
                   <button className="bg-transparent border border-white px-4 py-2 rounded-lg hover:bg-white hover:text-blue-600 transition flex items-center gap-2">
-                    <FaSignInAlt /> Dashboard
+                    <RxDashboard /> Dashboard
                   </button>
                 </Link>
               </li>
               <li>
                 <Link to="/transaction">
                   <button className="bg-white text-blue-600 px-4 py-2 rounded-lg hover:bg-transparent hover:text-white border border-white transition flex items-center gap-2">
-                    <FaEdit /> Transaction
+                    <GrTransaction /> Transaction
                   </button>
                 </Link>
               </li>
@@ -69,7 +72,7 @@ const Navbar = () => {
                     className="bg-white text-blue-600 px-4 py-2 rounded-lg hover:bg-transparent hover:text-white border border-white transition flex items-center gap-2"
                     onClick={handleLogOut}
                   >
-                    <FaEdit /> Log Out
+                    <RiLogoutBoxRLine /> Log Out
                   </button>
                 </Link>
               </li>
@@ -88,12 +91,12 @@ const Navbar = () => {
           <div className="flex space-x-4">
             <Link to="/dashboard">
               <button className="bg-transparent border border-white px-4 py-2 rounded-lg hover:bg-white hover:text-blue-600 transition flex items-center gap-2">
-                <FaSignInAlt /> Dashboard
+                <RxDashboard /> Dashboard
               </button>
             </Link>
             <Link to="/transaction">
               <button className="bg-white text-blue-600 px-4 py-2 rounded-lg hover:bg-transparent hover:text-white border border-white transition flex items-center gap-2">
-                <FaEdit /> Transaction
+                <GrTransaction /> Transaction
               </button>
             </Link>
             <Link to="/">
@@ -101,7 +104,7 @@ const Navbar = () => {
                 className="bg-white text-blue-600 px-4 py-2 rounded-lg hover:bg-transparent hover:text-white border border-white transition flex items-center gap-2"
                 onClick={handleLogOut}
               >
-                <FaEdit /> Log Out
+                <RiLogoutBoxRLine /> Log Out
               </button>
             </Link>
           </div>

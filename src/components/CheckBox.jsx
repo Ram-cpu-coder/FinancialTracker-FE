@@ -24,7 +24,7 @@ const CheckBox = ({ tranData, selectedIds, setSelectedIds }) => {
   console.log(selectedIds);
 
   return (
-    <div className="mt-4 overflow-x-scroll px-20">
+    <div className="overflow-x-scroll overflow-y-scroll max-h-screen px-20">
       <label>
         <input
           type="checkbox"

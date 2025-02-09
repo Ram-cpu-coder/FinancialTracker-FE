@@ -11,7 +11,6 @@ const DeleteTransaction = ({ selectedIds, setToggleDeleteBox }) => {
   const delTransaction = async () => {
     const accessToken = localStorage.getItem("accessToken");
     try {
-      console.log(100, selectedIds);
       setIsLoading(true);
 
       //   calling delete API
@@ -25,32 +24,27 @@ const DeleteTransaction = ({ selectedIds, setToggleDeleteBox }) => {
         },
       });
       toast.success("Deleted successfully!!!");
+
       //   loader
       setIsLoading(false);
-
+      setToggleDeleteBox(false);
       console.log(deletedItem);
     } catch (error) {
       setIsLoading(false);
       console.log(error);
       //   checking accessToken
-      if (!accessToken) {
-        return toast.error("Not Authorised !!!");
-      }
-      if (error.response) {
-        return (
-          toast.error(error.response?.data?.message) ||
-          "Failed to delete transaction"
-        );
-      } else {
-        toast.error("Failed to connect to Server!");
-      }
+      !accessToken ? toast.error("Not Authorised !!!") : "";
+
+      error.response
+        ? toast.error(error.response?.data?.message)
+        : toast.error("Failed to connect to Server!");
     }
   };
 
   return (
     <div className="h-full w-full flex justify-center items-center relative">
       {selectedIds.length === 0 ? (
-        <div className="bg-white rounded-lg p-5 border h-[auto] w-[90%] md:w-[70%] lg:w-[40%] deleteTransactionMediaQuery">
+        <div className="bg-white rounded-lg p-5 border h-[auto] w-[90%] md:w-[70%] lg:w-[40%]">
           <span
             onClick={() => setToggleDeleteBox(false)}
             className="flex justify-end"
@@ -69,7 +63,7 @@ const DeleteTransaction = ({ selectedIds, setToggleDeleteBox }) => {
           </div>
         </div>
       ) : (
-        <div className="bg-white rounded-lg p-5 border h-[auto] w-[90%] md:w-[70%] lg:w-[40%] deleteTransactionMediaQuery">
+        <div className="bg-white rounded-lg p-5 border h-[auto] w-[90%] md:w-[70%] lg:w-[40%]">
           <span
             onClick={() => setToggleDeleteBox(false)}
             className="flex justify-end"

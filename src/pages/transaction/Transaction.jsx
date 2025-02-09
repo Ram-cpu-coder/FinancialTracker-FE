@@ -62,7 +62,7 @@ const Transaction = () => {
               </div>
               <div className="flex justify-between w-[40%]">
                 <button
-                  className="flex items-center gap-2 py-1 px-5 rounded-lg bg-blue-600 active:bg-blue-800 cursor-pointer"
+                  className="flex items-center justify-center gap-2 py-1 px-5 rounded-lg bg-blue-600 active:bg-blue-800 cursor-pointer"
                   onClick={openTransaction}
                 >
                   <IoIosAddCircle /> Add
@@ -91,7 +91,7 @@ const Transaction = () => {
                 className="absolute top-0 min-w-full min-h-full"
                 style={{ backgroundColor: "rgba(0, 0, 0, 0.7)" }}
               ></div>
-              <div className="absolute sm:top-0 top-[-250px] md:top-0 w-full min-h-screen py-[10px`]">
+              <div className="absolute top-0 mt-9 w-full min-h-screen py-[10px]">
                 <CreateTransaction
                   setToggleTransactionBox={setToggleTransactionBox}
                 />

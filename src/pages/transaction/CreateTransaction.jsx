@@ -48,7 +48,7 @@ const CreateTransaction = ({ setToggleTransactionBox }) => {
   };
   return (
     <div className="h-full w-full flex justify-center items-center relative">
-      <div className="bg-white rounded-lg p-5 border h-[auto] w-[40%] addTransactionMediaQuery">
+      <div className="bg-white rounded-lg p-5 border h-[auto] w-[90%] md:w-[70%] lg:w-[40%]">
         <span
           onClick={() => setToggleTransactionBox(false)}
           className="flex justify-end"

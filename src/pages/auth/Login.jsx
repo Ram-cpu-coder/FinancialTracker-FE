@@ -73,6 +73,7 @@ const Login = () => {
       } else {
         toast.error(error.response.data.message);
       }
+      setIsLoading(false);
     }
   };
 
