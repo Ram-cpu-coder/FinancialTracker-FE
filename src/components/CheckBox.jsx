@@ -58,20 +58,25 @@ const CheckBox = ({ tranData, selectedIds, setSelectedIds }) => {
             </td>
             <td className="my-auto text-center">{item.createdAt}</td>
             <td className="my-auto text-center text-[red]">
-              {item.type === "Expense" ? item.amount : ""}
+              {item.type === "Expense" ? `-$${Math.abs(item.amount)}` : ""}
             </td>
             <td className="my-auto text-center text-[green]">
-              {item.type === "Income" ? item.amount : ""}
+              {item.type === "Income" ? `$${item.amount}` : ""}
             </td>
           </tr>
         ))}
         <tr className="grid grid-cols-[3fr_1.5fr_1fr] text-left border-b py-2">
           <td></td>
           <th>Total Balance</th>
-          <th>
-            $
+          <th className="">
             {tranData.reduce((acc, item) => {
               return (acc += item.amount);
+            }, 0) < 0
+              ? "-"
+              : ""}
+            $
+            {tranData.reduce((acc, item) => {
+              return Math.abs((acc += item.amount));
             }, 0)}
           </th>
         </tr>

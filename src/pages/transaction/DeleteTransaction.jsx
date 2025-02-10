@@ -3,11 +3,12 @@ import { IoCloseOutline } from "react-icons/io5";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { GridLoader } from "react-spinners";
+import { useTransaction } from "../../context/TransactionContext";
 
 const DeleteTransaction = ({ selectedIds, setToggleDeleteBox }) => {
   const [isLoading, setIsLoading] = useState(false);
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
+  const { transactionData } = useTransaction();
   const delTransaction = async () => {
     const accessToken = localStorage.getItem("accessToken");
     try {
@@ -23,10 +24,10 @@ const DeleteTransaction = ({ selectedIds, setToggleDeleteBox }) => {
           transactionsID: selectedIds,
         },
       });
-      toast.success("Deleted successfully!!!");
-
+      transactionData();
       //   loader
       setIsLoading(false);
+      toast.success("Deleted successfully!!!");
       setToggleDeleteBox(false);
       console.log(deletedItem);
     } catch (error) {

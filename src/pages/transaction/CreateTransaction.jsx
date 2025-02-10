@@ -3,11 +3,12 @@ import React, { useState } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
 import { GridLoader } from "react-spinners";
-import { use } from "react";
+import NewCustomInput from "../../components/NewCustomInput";
+import { useTransaction } from "../../context/TransactionContext";
 
 const CreateTransaction = ({ setToggleTransactionBox }) => {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
+  const { transactionData } = useTransaction();
   const [isLoading, setIsLoading] = useState(false);
 
   const initialState = {
@@ -17,11 +18,34 @@ const CreateTransaction = ({ setToggleTransactionBox }) => {
     description: "",
   };
   const [form, setForm] = useState(initialState);
-
+  const fields = [
+    {
+      label: "Full Name",
+      type: "text",
+      required: true,
+      placeholder: "Salary",
+      name: "description",
+      value: form.description,
+    },
+    {
+      label: "Amount",
+      type: "number",
+      required: true,
+      placeholder: "45",
+      name: "amount",
+      value: form.amount,
+    },
+    {
+      label: "Date",
+      type: "date",
+      required: true,
+      name: "date",
+      value: form.date,
+    },
+  ];
   const handleOnChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-  console.log(form);
   const handleOnSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -36,6 +60,7 @@ const CreateTransaction = ({ setToggleTransactionBox }) => {
           },
         }
       );
+      transactionData();
       setIsLoading(false);
       console.log(response);
       toast.success("TRANSACTION ADDED");
@@ -46,33 +71,38 @@ const CreateTransaction = ({ setToggleTransactionBox }) => {
       toast.error("Error");
     }
   };
-  return (
+  return isLoading ? (
+    <div className="w-full h-full flex justify-center items-center bg-black bg-opacity-50">
+      <div>
+        <GridLoader color="#0d6bc9" speedMultiplier={1} />
+      </div>
+    </div>
+  ) : (
     <div className="h-full w-full flex justify-center items-center relative">
-      <div className="bg-white rounded-lg p-5 border h-[auto] w-[90%] md:w-[70%] lg:w-[40%]">
+      <div className="bg-white rounded-lg p-5 h-[auto] w-[90%] md:w-[70%] lg:w-[40%]">
         <span
           onClick={() => setToggleTransactionBox(false)}
           className="flex justify-end"
         >
           <IoCloseOutline className=" w-[30px] h-[auto] cursor-pointer" />
         </span>
-        <hr className="my-3" />
         {/* form transaction creation */}
         <form
-          className="w-full h-full p-3 border rounded-lg"
+          className="w-full h-full p-3 rounded-lg"
           onSubmit={handleOnSubmit}
         >
-          <h1 className="text-3xl font-bold mb-5 text-center">
-            Add a Transaction !
-          </h1>
+          <h1 className="text-3xl font-bold mb-5">Add your Transaction!</h1>
 
-          <div className="flex flex-col mx-3 px-2">
-            <label htmlFor="type">Transaction Type</label>
+          <div className="mb-4">
+            <label htmlFor="type" className="block text-gray-700">
+              Transaction Type
+            </label>
             <select
               name="type"
               value={form.type}
               onChange={handleOnChange}
               id="type"
-              className="outline rounded my-2 px-3 py-1"
+              className="w-full p-2 border border-gray-300 rounded-lg"
             >
               <option value="default" selected>
                 --select--
@@ -82,41 +112,16 @@ const CreateTransaction = ({ setToggleTransactionBox }) => {
             </select>
           </div>
 
-          <div className="flex flex-col mx-3 px-2">
-            <label htmlFor="description">Title</label>
-            <input
-              type="text"
-              name="description"
-              value={form.description}
-              onChange={handleOnChange}
-              placeholder="Salary"
-              className="outline rounded my-2 px-3 py-1"
-            />
-          </div>
+          {fields.map((item) => {
+            return (
+              <NewCustomInput
+                onChange={handleOnChange}
+                key={item.name}
+                {...item}
+              />
+            );
+          })}
 
-          <div className="flex flex-col mx-3 px-2">
-            <label htmlFor="amount">Amount</label>
-            <input
-              type="number"
-              name="amount"
-              value={form.amount}
-              onChange={handleOnChange}
-              placeholder="Amount"
-              className="outline rounded my-2 px-3 py-1"
-            />
-          </div>
-
-          <div className="flex flex-col mx-3 px-2">
-            <label htmlFor="dateTran">Transaction Date</label>
-            <input
-              type="date"
-              name="date"
-              value={form.date}
-              onChange={handleOnChange}
-              placeholder="Amount"
-              className="outline rounded my-2 px-3 py-1"
-            />
-          </div>
           <div className="m-3 px-2">
             <button className="flex justify-center p-2 rounded-lg bg-blue-600 active:bg-blue-800 cursor-pointer text-white w-full">
               Submit
@@ -124,13 +129,6 @@ const CreateTransaction = ({ setToggleTransactionBox }) => {
           </div>
         </form>
       </div>
-      {isLoading && (
-        <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
-          <div>
-            <GridLoader color="#0d6bc9" speedMultiplier={1} />
-          </div>
-        </div>
-      )}
     </div>
   );
 };

@@ -81,7 +81,7 @@ const Login = () => {
     <>
       <div className="min-h-screen flex items-center relative justify-center bg-gray-100 p-4">
         {/* Container for Form and Image */}
-        <div className="flex flex-col bg-white rounded-lg shadow-md w-full max-w-5xl  md:flex-row md:justify-center justify-center">
+        <div className="flex flex-col-reverse bg-white rounded-lg shadow-md w-full max-w-5xl  md:flex-row md:justify-center justify-center mt-20">
           {/* Image (on top in mobile view) */}
           <div className="w-full order-1 md:order-2 flex justify-center">
             <img

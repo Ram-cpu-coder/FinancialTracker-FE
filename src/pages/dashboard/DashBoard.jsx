@@ -74,8 +74,15 @@ const DashBoard = () => {
                 <p className="font-bold">Balance</p>
                 <hr />
                 <p>
-                  {" "}
-                  ${tranData.reduce((acc, item) => (acc += item.amount), 0)}
+                  {tranData.reduce((acc, item) => {
+                    return (acc += item.amount);
+                  }, 0) < 0
+                    ? "-"
+                    : ""}
+                  $
+                  {tranData.reduce((acc, item) => {
+                    return Math.abs((acc += item.amount));
+                  }, 0)}
                 </p>
               </div>
             </div>
