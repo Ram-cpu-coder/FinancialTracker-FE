@@ -7,10 +7,9 @@ import {
   LinearScale,
   Tooltip,
   Legend,
-  plugins,
 } from "chart.js";
 
-// registering the chart components
+// Register chart components
 ChartJS.register(ArcElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 const DoughnutGraph = ({ income, expense }) => {
@@ -20,7 +19,7 @@ const DoughnutGraph = ({ income, expense }) => {
       {
         label: "# of Amount",
         data: [expense, income], // data for each section
-        backgroundColor: ["#d75b5b", "#026617"], //colors for each section
+        backgroundColor: ["#d75b5b", "#026617"], // colors for each section
         borderColor: ["#FF6384", "#36A2EB"],
         borderWidth: 1,
       },
@@ -38,9 +37,12 @@ const DoughnutGraph = ({ income, expense }) => {
       },
     },
   };
+
   return (
-    <div className="md:w-[350px] h-[auto] bg-white rounded-lg p-3 flex justify-center">
-      <Doughnut data={data} options={options} />
+    <div className="w-full sm:w-[300px] md:w-[400px] lg:w-[500px] xl:w-[600px] min-h-[300px] bg-white rounded-lg flex items-center p-2">
+      <div style={{ position: "relative", width: "100%", height: "100%" }}>
+        <Doughnut data={data} options={options} />
+      </div>
     </div>
   );
 };

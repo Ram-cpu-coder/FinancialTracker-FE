@@ -11,7 +11,7 @@ import {
   Legend,
 } from "chart.js";
 
-//register chart components
+// Register chart components
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -64,8 +64,10 @@ const LineIncome = ({ income }) => {
   };
 
   return (
-    <div className="md:w-[350px] min-h-[300px] bg-white rounded-lg flex items-center p-1">
-      <Line data={data} options={options} />
+    <div className="w-full sm:w-[300px] md:w-[400px] lg:w-[500px] xl:w-[600px] min-h-[300px] bg-white rounded-lg flex items-center p-2">
+      <div style={{ position: "relative", width: "100%", height: "100%" }}>
+        <Line data={data} options={options} />
+      </div>
     </div>
   );
 };

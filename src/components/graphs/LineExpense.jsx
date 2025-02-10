@@ -11,7 +11,7 @@ import {
   Legend,
 } from "chart.js";
 
-//   register chart components
+// Register chart components
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -36,6 +36,7 @@ const LineExpense = ({ expense }) => {
       },
     ],
   };
+
   const options = {
     responsive: true,
     plugins: {
@@ -61,9 +62,12 @@ const LineExpense = ({ expense }) => {
       },
     },
   };
+
   return (
-    <div className="md:w-[350px] min-h-[300px] bg-white rounded-lg flex items-center p-1">
-      <Line data={data} options={options} />
+    <div className="w-full sm:w-[350px] min-h-[300px] bg-white rounded-lg flex items-center p-1">
+      <div style={{ position: "relative", width: "100%", height: "100%" }}>
+        <Line data={data} options={options} />
+      </div>
     </div>
   );
 };

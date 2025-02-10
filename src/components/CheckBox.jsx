@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
+import { useTransaction } from "../context/TransactionContext";
 
-const CheckBox = ({ tranData, selectedIds, setSelectedIds }) => {
+const CheckBox = ({ searchedData, selectedIds, setSelectedIds, tranData }) => {
   const formattedTranData = tranData.map((item) => ({
     ...item,
     createdAt: new Date(item.createdAt).toLocaleDateString("en-CA"),
