@@ -1,13 +1,13 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
 import { GridLoader } from "react-spinners";
 import NewCustomInput from "../../components/NewCustomInput";
 import { useTransaction } from "../../context/TransactionContext";
+import useForm from "../../hooks/useForm";
+import { createTransactionAxios } from "../../../helper/axiosHelper";
 
 const CreateTransaction = ({ setToggleTransactionBox }) => {
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const { transactionData } = useTransaction();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -17,7 +17,8 @@ const CreateTransaction = ({ setToggleTransactionBox }) => {
     date: "",
     description: "",
   };
-  const [form, setForm] = useState(initialState);
+
+  const { form, setForm, handleOnChange } = useForm(initialState);
   const fields = [
     {
       label: "Full Name",
@@ -43,32 +44,22 @@ const CreateTransaction = ({ setToggleTransactionBox }) => {
       value: form.date,
     },
   ];
-  const handleOnChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+
   const handleOnSubmit = async (event) => {
     event.preventDefault();
-    try {
-      setIsLoading(true);
-      const accessToken = localStorage.getItem("accessToken");
-      const response = await axios.post(
-        `${API_BASE_URL}/transactions/add`,
-        form,
-        {
-          headers: {
-            Authorization: accessToken,
-          },
-        }
-      );
-      transactionData();
+
+    setIsLoading(true);
+    const data = await createTransactionAxios(form);
+    if (data.status == "success") {
+      await transactionData();
       setIsLoading(false);
-      console.log(response);
-      toast.success("TRANSACTION ADDED");
+      console.log(data);
+      toast[data.status](data.message);
       setForm(initialState);
-    } catch (error) {
-      console.log(error);
+      setToggleTransactionBox(false);
+    } else {
       console.log("WE GOT ERROR");
-      toast.error("Error");
+      setIsLoading(false);
     }
   };
   return (

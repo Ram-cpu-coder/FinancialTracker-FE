@@ -1,10 +1,9 @@
 import React from "react";
-import { useTransaction } from "../context/TransactionContext";
 
-const CheckBox = ({ searchedData, selectedIds, setSelectedIds, tranData }) => {
+const CheckBox = ({ selectedIds, setSelectedIds, tranData }) => {
   const formattedTranData = tranData.map((item) => ({
     ...item,
-    createdAt: new Date(item.createdAt).toLocaleDateString("en-CA"),
+    date: new Date(item.date).toLocaleDateString("en-CA"),
   }));
 
   const handleSelectedAll = () => {
@@ -57,7 +56,7 @@ const CheckBox = ({ searchedData, selectedIds, setSelectedIds, tranData }) => {
                 &nbsp;{item.description}
               </label>
             </td>
-            <td className="my-auto text-center">{item.createdAt}</td>
+            <td className="my-auto text-center">{item.date}</td>
             <td className="my-auto text-center text-[red]">
               {item.type === "Expense" ? `-$${Math.abs(item.amount)}` : ""}
             </td>

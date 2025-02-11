@@ -122,6 +122,7 @@ const Transaction = () => {
             <DeleteTransaction
               setToggleDeleteBox={setToggleDeleteBox}
               selectedIds={selectedIds}
+              setSelectedIds={setSelectedIds}
             />
           </div>
         </>

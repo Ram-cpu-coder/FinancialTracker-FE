@@ -1,23 +1,17 @@
 import React, { useContext, useState } from "react";
-import axios from "axios";
+import { getTransaction } from "../../helper/axiosHelper";
 
 const TransactionContext = React.createContext();
 
 export const TransactionProvider = ({ children }) => {
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const [tranData, setTranData] = useState([]);
-  const transactionData = async () => {
-    try {
-      const accessToken = localStorage.getItem("accessToken");
-      const response = await axios.get(`${API_BASE_URL}/transactions`, {
-        headers: {
-          Authorization: accessToken,
-        },
-      });
-      setTranData(response.data.transactionData);
 
+  const transactionData = async () => {
+    const data = await getTransaction();
+    if (data.status == "success") {
+      setTranData(data.transactionData);
       return true;
-    } catch (error) {
+    } else {
       return false;
     }
   };

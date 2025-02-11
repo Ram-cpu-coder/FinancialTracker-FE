@@ -5,39 +5,32 @@ import DoughnutGraph from "../../components/graphs/DoughnutGraph";
 import LineIncome from "../../components/graphs/LineIncome";
 import LineExpense from "../../components/graphs/LineExpense";
 import { useUser } from "../../context/UserContext";
+import { useTransaction } from "../../context/TransactionContext";
 import { GridLoader } from "react-spinners";
 
 const DashBoard = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [errorBox, setErrorBox] = useState(false);
-  const [tranData, setTranData] = useState([]);
   const [incomeType, setIncomeType] = useState([]);
   const [expenseType, setExpenseType] = useState([]);
   const { user } = useUser();
+  const { tranData, transactionData } = useTransaction();
 
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const transactionDataDashBoard = async () => {
+    setIsLoading(true);
+    await transactionData();
+    console.log(tranData);
 
-  const transactionData = async () => {
-    try {
-      setIsLoading(true);
-      const accessToken = localStorage.getItem("accessToken");
-      const response = await axios.get(`${API_BASE_URL}/transactions`, {
-        headers: {
-          Authorization: accessToken,
-        },
-      });
-      setTranData(response.data.transactionData);
-      const filteredIncome = await response.data.transactionData.filter(
+    if (tranData) {
+      const filteredIncome = await tranData.filter(
         (item) => item.type === "Income"
       );
-      const filteredExpense = await response.data.transactionData.filter(
+      const filteredExpense = await tranData.filter(
         (item) => item.type === "Expense"
       );
       setExpenseType(filteredExpense);
       setIncomeType(filteredIncome);
+
       setIsLoading(false);
-    } catch (error) {
-      setErrorBox(true);
     }
   };
 
@@ -50,7 +43,7 @@ const DashBoard = () => {
   );
 
   useEffect(() => {
-    transactionData();
+    transactionDataDashBoard();
   }, []);
 
   return user._id ? (
@@ -122,7 +115,7 @@ const DashBoard = () => {
           </div>
 
           {/* Graphs */}
-          <div className="flex sm:flex-col md:flex-row gap-5 justify-center items-center">
+          <div className="flex sm:flex-row w-full flex-col gap-5 justify-center items-center">
             {/* Graphs for Doughnut and Line charts */}
             <DoughnutGraph income={totalIncome} expense={totalExpense} />
             <LineIncome income={totalIncome} />

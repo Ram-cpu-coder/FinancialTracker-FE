@@ -40,9 +40,7 @@ const DoughnutGraph = ({ income, expense }) => {
 
   return (
     <div className="w-full sm:w-[300px] md:w-[400px] lg:w-[500px] xl:w-[600px] min-h-[300px] bg-white rounded-lg flex items-center p-2">
-      <div style={{ position: "relative", width: "100%", height: "100%" }}>
-        <Doughnut data={data} options={options} />
-      </div>
+      <Doughnut data={data} options={options} />
     </div>
   );
 };

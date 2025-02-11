@@ -24,6 +24,7 @@ const Navbar = () => {
     setIsMobile(window.innerWidth < 768);
   };
 
+  console.log("User", user);
   useEffect(() => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -88,7 +89,8 @@ const Navbar = () => {
             <div className="text-2xl font-bold">FinTrack</div>
           </Link>
           {/* Buttons */}
-          <div className="flex space-x-4">
+          <div className="flex space-x-4 items-center">
+            <div>Welcome, {user.username} !</div>
             <Link to="/dashboard">
               <button className="bg-transparent border border-white px-4 py-2 rounded-lg hover:bg-white hover:text-blue-600 transition flex items-center gap-2">
                 <RxDashboard /> Dashboard

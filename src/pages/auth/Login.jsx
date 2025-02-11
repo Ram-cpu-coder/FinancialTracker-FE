@@ -6,17 +6,20 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
 import { GridLoader } from "react-spinners";
+import useForm from "../../hooks/useForm";
+import { loginUser } from "../../../helper/axiosHelper";
 
 const Login = () => {
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
-  const { setUser, isLogged, setIsLogged, user } = useUser();
-  const [isLoading, setIsLoading] = useState(false);
   const initialState = {
     email: "",
     password: "",
   };
-  const [form, setForm] = useState(initialState);
+
+  const { form, setForm, handleOnChange } = useForm(initialState);
+
+  const { setUser, isLogged, setIsLogged, user } = useUser();
+  const [isLoading, setIsLoading] = useState(false);
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -45,35 +48,26 @@ const Login = () => {
     user?._id && navigate(goTo);
   }, [user._id]);
 
-  const handleOnChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
   const handleOnSubmit = async (event) => {
     event.preventDefault();
-    setIsLoading(true);
-    try {
-      const response = await axios.post(`${API_BASE_URL}/users/login`, form);
+    setIsLogged(true);
+    // from axios helper
+    const data = await loginUser(form);
 
-      toast.success(response.data.message);
+    // update accessToken in localstorage
+    toast[data.status](data.message);
+    localStorage.setItem("accessToken", data.accessToken);
 
+    if (data.status == "success") {
       setIsLoading(false);
-      // accesstoken storing in local storage
-      localStorage.setItem("accessToken", response.data.accessToken);
-      console.log(response);
-
-      // nagivation to the private apis
-      setUser(response.data.user);
-      setIsLogged(true);
+      // update user from user context
+      setUser(data.user);
       setForm(initialState);
-
+      // toast message
       navigate("/dashboard");
-    } catch (error) {
-      if (!form.email && !form.password) {
-        toast.error("Fill the Form!!!");
-      } else {
-        toast.error(error.response.data.message);
-      }
+    } else {
       setIsLoading(false);
+      navigate("/login");
     }
   };
 

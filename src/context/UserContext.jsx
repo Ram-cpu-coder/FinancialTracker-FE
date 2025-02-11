@@ -1,13 +1,12 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
+import { autoLoginAxios } from "../../helper/axiosHelper";
 
 // creating a context
 const UserContext = React.createContext();
 
 // providers nedded so creating it , it is a function
 export const UserProvider = ({ children }) => {
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
   const [user, setUser] = useState({});
   const [isLogged, setIsLogged] = useState(false);
 
@@ -17,17 +16,10 @@ export const UserProvider = ({ children }) => {
   };
 
   const autoLogin = async () => {
-    const accessToken = localStorage.getItem("accessToken");
-
-    if (accessToken) {
-      const response = await axios.get(`${API_BASE_URL}/users`, {
-        headers: {
-          Authorization: accessToken,
-        },
-      });
-
-      if (response.data && response.data.status == "success") {
-        setUser(response.data.user);
+    const data = await autoLoginAxios();
+    if (data) {
+      if (data && data.status == "success") {
+        setUser(data.user);
         return true;
       } else {
         setUser({});

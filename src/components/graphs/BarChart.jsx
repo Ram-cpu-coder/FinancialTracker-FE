@@ -25,9 +25,16 @@ const BarChart = ({ income, expense }) => {
     labels: ["January", "February", "March", "April", "May"],
     datasets: [
       {
-        label: ["# of Amount"],
-        data: [340, 459],
-        backgroundColor: ["#d75b5b", "#026617"],
+        label: ["Expense"],
+        data: [340],
+        backgroundColor: ["#d75b5b"],
+        borderColor: "rgba(75, 192, 192, 1)",
+        borderWidth: 1,
+      },
+      {
+        label: ["Income"],
+        data: [1000],
+        backgroundColor: ["#026617"],
         borderColor: "rgba(75, 192, 192, 1)",
         borderWidth: 1,
       },

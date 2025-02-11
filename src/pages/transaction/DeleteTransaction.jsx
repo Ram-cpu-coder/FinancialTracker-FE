@@ -1,41 +1,36 @@
 import React, { useState } from "react";
 import { IoCloseOutline } from "react-icons/io5";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { GridLoader } from "react-spinners";
 import { useTransaction } from "../../context/TransactionContext";
+import { deleteTransaction } from "../../../helper/axiosHelper";
 
-const DeleteTransaction = ({ selectedIds, setToggleDeleteBox }) => {
+const DeleteTransaction = ({
+  selectedIds,
+  setSelectedIds,
+  setToggleDeleteBox,
+}) => {
   const [isLoading, setIsLoading] = useState(false);
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const { transactionData } = useTransaction();
-  const delTransaction = async () => {
-    const accessToken = localStorage.getItem("accessToken");
-    try {
-      setIsLoading(true);
 
-      //   calling delete API
-      const deletedItem = await axios.delete(`${API_BASE_URL}/transactions`, {
-        headers: {
-          Authorization: accessToken,
-          "Content-Type": "application/json",
-        },
-        data: {
-          transactionsID: selectedIds,
-        },
-      });
-      transactionData();
+  const delTransaction = async () => {
+    setIsLoading(true);
+    const data = await deleteTransaction({
+      transactionsID: selectedIds,
+    });
+
+    if (data.status == "success") {
+      // updating the new data
+      await transactionData();
       //   loader
       setIsLoading(false);
+      // toast message
       toast.success("Deleted successfully!!!");
       setToggleDeleteBox(false);
-      console.log(deletedItem);
-    } catch (error) {
+      setSelectedIds([]);
+    } else {
       setIsLoading(false);
-      console.log(error);
-      //   checking accessToken
       !accessToken ? toast.error("Not Authorised !!!") : "";
-
       error.response
         ? toast.error(error.response?.data?.message)
         : toast.error("Failed to connect to Server!");
@@ -90,7 +85,7 @@ const DeleteTransaction = ({ selectedIds, setToggleDeleteBox }) => {
                     className="p-2 rounded-lg bg-red-600 active:bg-red-800 cursor-pointer text-white text-sm md:text-base"
                     onClick={delTransaction}
                   >
-                    Yes, Delete
+                    Delete {selectedIds.length} transactions
                   </button>
                   <button
                     onClick={() => setToggleDeleteBox(false)}
