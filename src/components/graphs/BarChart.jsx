@@ -22,18 +22,18 @@ ChartJS.register(
 
 const BarChart = ({ income, expense }) => {
   const data = {
-    labels: ["January", "February", "March", "April", "May"],
+    // labels: ["January", "February", "March", "April", "May"],
     datasets: [
       {
         label: ["Expense"],
-        data: [340],
+        data: { expense },
         backgroundColor: ["#d75b5b"],
         borderColor: "rgba(75, 192, 192, 1)",
         borderWidth: 1,
       },
       {
         label: ["Income"],
-        data: [1000],
+        data: { income },
         backgroundColor: ["#026617"],
         borderColor: "rgba(75, 192, 192, 1)",
         borderWidth: 1,

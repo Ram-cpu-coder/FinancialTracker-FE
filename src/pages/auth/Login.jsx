@@ -49,28 +49,41 @@ const Login = () => {
   }, [user._id]);
 
   const handleOnSubmit = async (event) => {
+    setIsLoading(true);
     event.preventDefault();
-    setIsLogged(true);
-    // from axios helper
-    const data = await loginUser(form);
+    try {
+      // from axios helper
+      const data = await loginUser(form);
 
-    // update accessToken in localstorage
-    toast[data.status](data.message);
-    localStorage.setItem("accessToken", data.accessToken);
-
-    if (data.status == "success") {
+      if (data.status == "success") {
+        // update user from user context
+        setUser(data.user);
+        setForm(initialState);
+        // toast message
+        navigate("/dashboard");
+        setIsLoading(false);
+      } else {
+        navigate("/login");
+        setIsLoading(false);
+      }
+      // update accessToken in localstorage
+      toast[data.status](data.message);
+      localStorage.setItem("accessToken", data.accessToken);
+    } catch (error) {
       setIsLoading(false);
-      // update user from user context
-      setUser(data.user);
-      setForm(initialState);
-      // toast message
-      navigate("/dashboard");
-    } else {
-      setIsLoading(false);
-      navigate("/login");
+      toast.error("Login failed. Please Try Again!");
     }
+
+    setIsLoading(false);
   };
 
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center relative justify-center bg-black bg-opacity-50 p-4">
+        <GridLoader color="#0d6bc9" speedMultiplier={1} />
+      </div>
+    );
+  }
   return (
     <>
       <div className="min-h-screen flex items-center relative justify-center bg-gray-100 p-4">
@@ -103,7 +116,7 @@ const Login = () => {
 
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 transition"
+                className="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 transition cursor-pointer"
               >
                 Log In
               </button>
@@ -113,20 +126,24 @@ const Login = () => {
             <div className="mt-4 text-center">
               <p className="text-gray-700">
                 Don't have an account? &nbsp;
-                <Link to="/signup" className="text-blue-600 hover:underline">
+                <Link
+                  to="/signup"
+                  className="text-blue-600 hover:underline cursor-pointer"
+                >
                   Sign Up
                 </Link>
               </p>
             </div>
           </div>
         </div>
-        {isLoading && (
-          <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
-            <div>
-              <GridLoader color="#0d6bc9" speedMultiplier={1} />
+        {/* {isLoading ||
+          !user?._id(
+            <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
+              <div>
+                <GridLoader color="#0d6bc9" speedMultiplier={1} />
+              </div>
             </div>
-          </div>
-        )}
+          )} */}
       </div>
     </>
   );

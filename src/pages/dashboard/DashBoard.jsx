@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect, useRef } from "react";
 import BarChart from "../../components/graphs/BarChart";
 import DoughnutGraph from "../../components/graphs/DoughnutGraph";
 import LineIncome from "../../components/graphs/LineIncome";
@@ -15,36 +14,29 @@ const DashBoard = () => {
   const { user } = useUser();
   const { tranData, transactionData } = useTransaction();
 
-  const transactionDataDashBoard = async () => {
-    setIsLoading(true);
-    await transactionData();
-    console.log(tranData);
-
-    if (tranData) {
-      const filteredIncome = await tranData.filter(
-        (item) => item.type === "Income"
-      );
-      const filteredExpense = await tranData.filter(
-        (item) => item.type === "Expense"
-      );
-      setExpenseType(filteredExpense);
-      setIncomeType(filteredIncome);
-
-      setIsLoading(false);
-    }
-  };
-
-  const totalIncome = incomeType.reduce((acc, item) => {
-    return (acc += item.amount);
-  }, 0);
-
+  const totalIncome = Math.abs(
+    incomeType.reduce((acc, item) => (acc += item.amount), 0)
+  );
   const totalExpense = Math.abs(
     expenseType.reduce((acc, item) => (acc += item.amount), 0)
   );
+  const transactionDataDashBoard = async () => {
+    setIsLoading(true);
+    await transactionData();
+    setIsLoading(false);
+  };
 
   useEffect(() => {
     transactionDataDashBoard();
   }, []);
+
+  useEffect(() => {
+    const filteredIncome = tranData.filter((item) => item.type === "Income");
+    const filteredExpense = tranData.filter((item) => item.type === "Expense");
+
+    setExpenseType(filteredExpense);
+    setIncomeType(filteredIncome);
+  }, [tranData]);
 
   return user._id ? (
     <div className="w-full bg-gray-800 relative">
@@ -109,7 +101,12 @@ const DashBoard = () => {
               <div className="flex flex-col w-full justify-start">
                 <p className="font-bold">Expense</p>
                 <hr />
-                <p>${totalExpense}</p>
+                <p>
+                  $
+                  {Math.abs(
+                    expenseType.reduce((acc, item) => (acc += item.amount), 0)
+                  )}
+                </p>
               </div>
             </div>
           </div>
