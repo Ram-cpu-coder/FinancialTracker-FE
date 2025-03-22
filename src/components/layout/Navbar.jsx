@@ -14,7 +14,7 @@ const Navbar = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [isOpen, setIsOpen] = useState(false);
 
-  const { logOut, setUser, user, isLogged, setIsLogged, autoLogin } = useUser();
+  const { logOut, user, isLogged, setIsLogged, autoLogin } = useUser();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -24,16 +24,9 @@ const Navbar = () => {
     setIsMobile(window.innerWidth < 768);
   };
 
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   const handleLogOut = () => {
     logOut();
   };
-
-  console.log(user, user.username);
 
   useEffect(() => {
     const clonedUser = async () => {
@@ -43,12 +36,17 @@ const Navbar = () => {
     clonedUser();
   }, [isLogged]);
 
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return user?._id ? (
     isMobile ? (
       <nav className="bg-blue-600 p-2 text-white shadow-md w-full flex justify-center">
         <div className="flex items-center justify-between w-[90%] z-1">
           {/* Logo */}
-          <Link to={isLogged ? "/dashboard" : "/"}>
+          <Link to="/dashboard">
             <div className="text-2xl font-bold cursor-pointer">FinTrack</div>
           </Link>
 
@@ -63,7 +61,7 @@ const Navbar = () => {
           >
             <div className="w-[90%] flex sm:justify-end justify-center items-center sm:flex-row flex-col gap-10">
               <li>
-                <Link to={isLogged ? "/dashboard" : "/"}>
+                <Link to="/dashboard">
                   <button className="bg-transparent border border-white px-4 py-2 rounded-lg hover:bg-white hover:text-blue-600 transition flex items-center gap-2 cursor-pointer">
                     <RxDashboard /> Dashboard
                   </button>
@@ -94,7 +92,7 @@ const Navbar = () => {
       <nav className="bg-blue-600 p-2 text-white shadow-md w-full flex justify-center">
         <div className="flex items-center justify-between w-[90%] z-1">
           {/* Logo */}
-          <Link to={isLogged ? "/dashboard" : "/"}>
+          <Link to="/dashboard">
             <div className="text-2xl font-bold cursor-pointer">FinTrack</div>
           </Link>
           {/* Buttons */}

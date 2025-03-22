@@ -1,6 +1,9 @@
 import React, { useContext, useState } from "react";
-import axios from "axios";
-import { autoLoginAxios } from "../../helper/axiosHelper";
+import {
+  autoLoginAxios,
+  getUserDetail,
+  loginUser,
+} from "../../helper/axiosHelper";
 
 // creating a context
 const UserContext = React.createContext();
@@ -28,10 +31,26 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  // userDetail of the logged user
+  const userDetail = async () => {
+    const { user } = await getUserDetail();
+    if (user) {
+      setUser(user);
+      return true;
+    }
+  };
   return (
     <UserContext.Provider
       // being exposed
-      value={{ user, setUser, logOut, isLogged, setIsLogged, autoLogin }}
+      value={{
+        user,
+        setUser,
+        logOut,
+        isLogged,
+        setIsLogged,
+        autoLogin,
+        userDetail,
+      }}
     >
       {children}
     </UserContext.Provider>

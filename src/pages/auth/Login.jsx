@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import NewCustomInput from "../../components/NewCustomInput";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
@@ -17,7 +16,7 @@ const Login = () => {
 
   const { form, setForm, handleOnChange } = useForm(initialState);
 
-  const { setUser, isLogged, setIsLogged, user } = useUser();
+  const { user, userDetail } = useUser();
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -44,39 +43,39 @@ const Login = () => {
 
   const goTo = location?.state?.from?.pathname || "/dashboard";
 
-  useEffect(() => {
-    user?._id && navigate(goTo);
-  }, [user._id]);
-
   const handleOnSubmit = async (event) => {
     setIsLoading(true);
     event.preventDefault();
     try {
       // from axios helper
       const data = await loginUser(form);
-
       if (data.status == "success") {
-        // update user from user context
-        setUser(data.user);
-        setForm(initialState);
+        // update accessToken in localstorage
+        localStorage.setItem("accessToken", data.accessToken);
         // toast message
         navigate("/dashboard");
-        setIsLoading(false);
-      } else {
+      }
+      if (data.status == "error") {
+        setForm(initialState);
         navigate("/login");
         setIsLoading(false);
       }
-      // update accessToken in localstorage
+      // update user from user context
+      const user = await userDetail();
+      setIsLoading(false);
       toast[data.status](data.message);
-      localStorage.setItem("accessToken", data.accessToken);
     } catch (error) {
       setIsLoading(false);
       toast.error("Login failed. Please Try Again!");
     }
-
     setIsLoading(false);
   };
 
+  useEffect(() => {
+    user?._id && navigate(goTo);
+  }, [user._id]);
+
+  console.log(user);
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center relative justify-center bg-black bg-opacity-50 p-4">

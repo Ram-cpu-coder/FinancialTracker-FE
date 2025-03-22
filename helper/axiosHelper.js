@@ -28,6 +28,16 @@ export const loginUser = async (data) => {
             data
         })
 }
+export const getUserDetail = async () => {
+    const accessToken = localStorage.getItem("accessToken")
+    return apiProcessor({
+        method: "get",
+        url: rootURL + "/users",
+        headers: {
+            Authorization: accessToken
+        }
+    })
+}
 export const autoLoginAxios = async () => {
     const accessToken = localStorage.getItem("accessToken")
     return apiProcessor({
