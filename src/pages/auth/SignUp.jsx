@@ -57,7 +57,7 @@ const SignUp = () => {
     try {
       const response = await axios.post(`${API_BASE_URL}/users/register`, form);
 
-      console.log(response);
+      // console.log(response);
       setSignedUp(true);
       toast.success(response.data.message);
     } catch (error) {
@@ -66,21 +66,26 @@ const SignUp = () => {
   };
 
   return signedUp ? (
-    <div className="h-screen flex flex-col justify-center items-center bg-gray-100">
-      <img
-        src="./assets/done.png"
-        alt=""
-        srcset=""
-        className="h-[300px] w-[auto]"
-      />
-      <div>
-        Signed Up Successfully!
-        <span>
-          &nbsp; Please Head to
-          <Link to="/login" className="text-blue-600 hover:text-blue-500">
-            &nbsp; Log In
-          </Link>
-        </span>
+    <div className="min-h-screen flex justify-center items-center bg-gray-100">
+      <div className="flex justify-center items-center p-2">
+        <img
+          src="./assets/done.png"
+          alt=""
+          srcset=""
+          className="h-[auto] w-[100px]"
+        />
+        <div>
+          Signed Up Successfully!
+          <span>
+            &nbsp; Please Head to&nbsp;
+            <Link
+              to="/login"
+              className="text-blue-600 hover:text-blue-500 underline"
+            >
+              Log In
+            </Link>
+          </span>
+        </div>
       </div>
     </div>
   ) : (

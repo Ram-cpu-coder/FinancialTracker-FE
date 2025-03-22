@@ -112,7 +112,7 @@ const DashBoard = () => {
           </div>
 
           {/* Graphs */}
-          <div className="flex sm:flex-row w-full flex-col gap-5 justify-center items-center">
+          <div className="flex gap-5 justify-between p-3 flex-col md:flex-row">
             {/* Graphs for Doughnut and Line charts */}
             <DoughnutGraph income={totalIncome} expense={totalExpense} />
             <LineIncome income={totalIncome} />

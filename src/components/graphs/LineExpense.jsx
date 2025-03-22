@@ -64,10 +64,8 @@ const LineExpense = ({ expense }) => {
   };
 
   return (
-    <div className="w-full sm:w-[350px] min-h-[300px] bg-white rounded-lg flex items-center p-1">
-      <div style={{ position: "relative", width: "100%", height: "100%" }}>
-        <Line data={data} options={options} />
-      </div>
+    <div className="sm:w-[100%] md:w-[48%] lg:w-[32%] min-h-[300px] bg-white rounded-lg flex items-center p-1">
+      <Line data={data} options={options} />
     </div>
   );
 };

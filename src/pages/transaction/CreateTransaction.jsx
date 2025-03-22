@@ -53,12 +53,12 @@ const CreateTransaction = ({ setToggleTransactionBox }) => {
     if (data.status == "success") {
       await transactionData();
       setIsLoading(false);
-      console.log(data);
+      // console.log(data);
       toast[data.status](data.message);
       setForm(initialState);
       setToggleTransactionBox(false);
     } else {
-      console.log("WE GOT ERROR");
+      // console.log("WE GOT ERROR");
       setIsLoading(false);
     }
   };
@@ -113,11 +113,9 @@ const CreateTransaction = ({ setToggleTransactionBox }) => {
                 );
               })}
 
-              <div className="m-3 px-2">
-                <button className="flex justify-center p-2 rounded-lg bg-blue-600 active:bg-blue-800 cursor-pointer text-white w-full">
-                  Submit
-                </button>
-              </div>
+              <button className="flex justify-center p-2 rounded-lg bg-blue-600 active:bg-blue-800 cursor-pointer text-white w-full">
+                Submit
+              </button>
             </form>
           </div>
         </div>

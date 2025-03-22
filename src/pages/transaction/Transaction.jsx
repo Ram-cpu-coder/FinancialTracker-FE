@@ -54,43 +54,45 @@ const Transaction = () => {
       <GridLoader color="#0d6bc9" speedMultiplier={1} />
     </div>
   ) : (
-    <div className="relative">
+    <div className="relative min-h-screen">
       <div className="flex justify-center w-full h-full">
         <div className="flex justify-center w-full bg-white min-h-full mb-10">
-          <div className="px-5 py-10 my-5 bg-gray-800 text-white min-h-full w-[80%] rounded-lg transactionMediaQuery">
+          <div className="px-5 py-10 my-5 bg-gray-800 text-white h-full w-[80%] rounded-lg transactionMediaQuery">
             <hr className="my-5" />
-            <div className="flex justify-between py-2 barForTransaction w-full">
+            <div className="flex justify-between py-2 barForTransaction w-full px-20">
               <div className="flex justify-between items-center w-[50%]">
                 <p>{displayTransaction.length} transaction(s) found!</p>
+                {/* search bar */}
                 <input
                   type="text"
                   placeholder="Search transactions..."
                   value={searchedData}
-                  className="outline bg-white text-black px-3 py-1 rounded-lg"
+                  className="outline bg-white text-black px-3 py-1 rounded"
                   onChange={handleOnSearch}
                 />
               </div>
               <div className="flex justify-between w-[40%]">
                 <button
-                  className="flex items-center justify-center gap-2 py-1 px-5 rounded-lg bg-blue-600 active:bg-blue-800 cursor-pointer"
+                  className="flex items-center justify-center gap-2 py-1 px-5 rounded bg-blue-600 active:bg-blue-800 cursor-pointer"
                   onClick={openTransaction}
                 >
                   <IoIosAddCircle /> Add
                 </button>
                 <button
-                  className="flex items-center gap-2 py-1 px-5 rounded-lg bg-red-600 active:bg-red-800 cursor-pointer"
+                  className="flex items-center gap-2 py-1 px-5 rounded bg-red-600 active:bg-red-800 cursor-pointer"
                   onClick={delTransactionButton}
                 >
                   <MdDelete /> Delete
                 </button>
               </div>
             </div>
+            {/* transaction Table  // sorry for the name  */}
             <CheckBox
               searchedData={searchedData}
               selectedIds={selectedIds}
               setSelectedIds={setSelectedIds}
               tranData={displayTransaction}
-              className="w-full"
+              className="w-full h-full"
             />
           </div>
         </div>

@@ -75,7 +75,7 @@ const Login = () => {
     user?._id && navigate(goTo);
   }, [user._id]);
 
-  console.log(user);
+  // console.log(user);
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center relative justify-center bg-black bg-opacity-50 p-4">
@@ -85,9 +85,9 @@ const Login = () => {
   }
   return (
     <>
-      <div className="min-h-screen flex items-center relative justify-center bg-gray-100 p-4">
+      <div className="min-h-screen flex items-center relative justify-center bg-gray-100">
         {/* Container for Form and Image */}
-        <div className="flex flex-col-reverse bg-white rounded-lg shadow-md w-full max-w-5xl  md:flex-row md:justify-center justify-center mt-20">
+        <div className="flex flex-col-reverse bg-white rounded-lg shadow-md w-full max-w-5xl  md:flex-row md:justify-center justify-center">
           {/* Image (on top in mobile view) */}
           <div className="w-full order-1 md:order-2 flex justify-center">
             <img

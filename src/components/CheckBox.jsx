@@ -21,10 +21,10 @@ const CheckBox = ({ selectedIds, setSelectedIds, tranData }) => {
         : [...prev, id]
     );
   };
-  console.log(selectedIds);
+  // console.log(selectedIds);
 
   return (
-    <div className="overflow-x-scroll overflow-y-scroll max-h-screen px-20">
+    <div className="h-full px-20">
       <label>
         <input
           type="checkbox"
@@ -34,7 +34,7 @@ const CheckBox = ({ selectedIds, setSelectedIds, tranData }) => {
         &nbsp;Select All
       </label>
       {/* list of transactions */}
-      <table className="min-w-[1050px] mt-9">
+      <table className="min-w-full mt-9">
         <tr className="grid grid-cols-[60px_minmax(200px,_2fr)_1fr_1fr_1fr] text-left border-b py-2">
           <th>#</th>
           <th className="text-left">Title</th>
@@ -65,10 +65,10 @@ const CheckBox = ({ selectedIds, setSelectedIds, tranData }) => {
             </td>
           </tr>
         ))}
-        <tr className="grid grid-cols-[3fr_1.5fr_1fr] text-left border-b py-2">
+        <tr className="grid grid-cols-[3fr_1.5fr_1fr] text-left border-b py-2 bg-white text-black mt-2 px-5">
           <td></td>
-          <th>Total Balance</th>
-          <th className="">
+          <th className="text-right">Total Balance</th>
+          <th className="text-right">
             {tranData.reduce((acc, item) => {
               return (acc += item.amount);
             }, 0) < 0
