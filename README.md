@@ -1,4 +1,4 @@
-# 💸 Financial Tracker – Frontend
+# 💸 Financial Tracker
 
 A modern and responsive financial tracking web app to help users manage their personal income and expenses effectively.
 
