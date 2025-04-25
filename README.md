@@ -1,69 +1,38 @@
-Financial Tracker – Frontend
-A modern financial tracking application built with Next.js and Mantine UI, designed to help users manage their personal finances efficiently.​
-GitHub
-+3
-GitHub
-+3
-GitHub
-+3
+# 💸 Financial Tracker – Frontend
 
-🚀 Features
-Track income and expenses with ease
+A modern and responsive financial tracking web app to help users manage their personal income and expenses effectively.
 
-Visualize financial data through interactive charts
+## 🔍 Overview
 
-Responsive design for all devices
+This is the frontend of the Financial Tracker project, built with **Next.js** and **Mantine UI**, and deployed on **Vercel**. The application connects with a backend API to perform operations like tracking transactions, user authentication, and visualizing financial data.
 
-Secure authentication and user management
+## 🚀 Features
 
-Real-time data updates with API integration​
-GitHub
-+9
-GitHub
-+9
-GitHub
-+9
+- User authentication with JWT
+- Add, update, and delete income/expenses
+- Visual dashboards and summaries
+- Mobile-responsive design
+- Real-time UI updates
 
-🛠 Tech Stack
-Frontend: Next.js, Mantine UI
+## 🛠 Tech Stack
 
-State Management: Redux Toolkit
+- **Framework:** Next.js
+- **UI Library:** Mantine UI
+- **State Management:** Redux Toolkit
+- **Authentication:** JWT
+- **HTTP Client:** Axios
+- **Deployment:** Vercel
 
-Authentication: JWT-based auth
+## 📦 Getting Started
 
-Deployment: Vercel​
-GitHub
-+1
-GitHub
-+1
-GitHub
-+11
-Coders Packet
-+11
-GitHub
-+11
-GitHub
-+1
-GitHub
-+1
+### Prerequisites
 
-📦 Getting Started
-Clone the repository:
+- Node.js (v18+ recommended)
+- npm or yarn
 
-bash
-Copy
-Edit
+### Installation
+
+```bash
 git clone https://github.com/Ram-cpu-coder/FinanceTracker-FE.git
 cd FinanceTracker-FE
-Install dependencies:
-
-bash
-Copy
-Edit
 npm install
-Run the development server:
-
-bash
-Copy
-Edit
-npm run dev
