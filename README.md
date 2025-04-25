@@ -1,26 +1,24 @@
-# 💸 Financial Tracker
+# 💸 Financial Tracker – Frontend
 
-A modern and responsive financial tracking web app to help users manage their personal income and expenses effectively.
+A responsive and user-friendly financial tracking app built with **React.js**, helping users manage income and expenses effectively.
 
 ## 🔍 Overview
 
-This is the frontend of the Financial Tracker project, built with **Next.js** and **Mantine UI**, and deployed on **Vercel**. The application connects with a backend API to perform operations like tracking transactions, user authentication, and visualizing financial data.
+This is the frontend of the Financial Tracker application. Users can log in, add expenses/income, view summaries, and track financial performance. It's connected to a backend API for persistent data and deployed using **Vercel**.
 
 ## 🚀 Features
 
-- User authentication with JWT
-- Add, update, and delete income/expenses
-- Visual dashboards and summaries
-- Mobile-responsive design
-- Real-time UI updates
+- 🔐 User authentication (JWT)
+- ➕ Add, edit, delete income/expenses
+- 📊 Summary dashboard with visual feedback
+- 📱 Mobile-responsive with Bootstrap
+- 🔁 Real-time state updates via Redux
 
 ## 🛠 Tech Stack
 
-- **Framework:** Next.js
-- **UI Library:** Mantine UI
+- **Frontend Framework:** React.js (Vite or CRA)
 - **State Management:** Redux Toolkit
-- **Authentication:** JWT
-- **HTTP Client:** Axios
+- **Styling:** Bootstrap 5
 - **Deployment:** Vercel
 
 ## 📦 Getting Started
